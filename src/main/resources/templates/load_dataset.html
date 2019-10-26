@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>JStat Load Data Set</title>
@@ -7,6 +7,25 @@
 <body>
 
 <h1>load a data set</h1>
+
+<div>
+
+
+
+    <form method="POST"  th:action="@{/load-dataset}"  th:object="${fileName}">
+
+        <div th:if="${#fields.hasErrors()}">
+            <span class="validationError">
+                Please correct the problems below and resubmit.
+            </span>
+        </div>
+
+        <input type="file" name="fileName" id="url"  th:field="*{fileName}"  required>
+
+
+        <button>Load</button>
+</form>
+</div>
 
 </body>
 </html>

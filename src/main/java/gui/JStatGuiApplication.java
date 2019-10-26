@@ -1,8 +1,11 @@
 package gui;
 
+import detail.JStatGuiGlobalData;
 import detail.MapDataContainer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.concurrent.Executors;
 
 
 /**
@@ -17,9 +20,24 @@ public class JStatGuiApplication {
     public static void main(String[] args) {
 
         // do the needed initializations
-        JStatGuiLoader.dataSetContainer = new MapDataContainer();
+
+        // global object holding the loaded data sets
+        JStatGuiGlobalData.dataSetContainer = new MapDataContainer();
+
+        // the worker pool
+        JStatGuiGlobalData.workersPool = Executors.newFixedThreadPool(5);
+
+
+        if(JStatGuiGlobalData.workersPool == null){
+            throw new NullPointerException("Could not create worker pool");
+        }
 
         SpringApplication.run(JStatGuiApplication.class, args);
+
+        //System.out.println("Terminating...");
+
+        // once the app stops shutdown the threads
+        //JStatGuiGlobalData.workersPool.shutdown();
     }
 
 }
