@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>JStat Analysis</title>
+</head>
+<body>
+
+
+
+<ul>
+    <li>Select active dataset</li>
+    <li>Exploratory Analysis</li>
+    <li>Plotting</li>
+    <li>Modelling
+        <ul>Regression
+            <li>Linear Regression</li>
+        </ul>
+        <ul>Classification
+            <li>Logistic Regression</li>
+        </ul>
+        <ul>Clustering
+            <li>KMeans</li>
+        </ul>
+    </li>
+</ul>
+
+
+<div>
+
+
+
+    <form method="POST"  th:action="@{/load-dataset}"  th:object="${fileName}">
+
+        <div th:if="${#fields.hasErrors()}">
+            <span class="validationError">
+                Please correct the problems below and resubmit.
+            </span>
+        </div>
+
+        <input type="file" name="fileName" id="url"  th:field="*{fileName}"  required>
+
+
+        <button>Load</button>
+    </form>
+</div>
+
+</body>
+</html>
