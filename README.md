@@ -1,2 +1,2 @@
 # jstat-gui
-A web application for jstat.
+Web-based GUI application for jstat.
