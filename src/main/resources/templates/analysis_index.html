@@ -6,11 +6,20 @@
 </head>
 <body>
 
-
+<form method="POST" th:action="@{/analysis}">
 
 <ul>
     <li>Select active dataset</li>
-    <li>Exploratory Analysis</li>
+    <p>This should be a list of loaded datasets</p>
+
+    <div th:each="setName: ${dataSetNames}">
+        <input name="dataSetName" type="radio" th:text="${setName}"  th:value="${setName}" required/>
+    </div>
+
+
+    <li>
+        <input name="eda" type="radio" value="Exploratory Analysis" /> Exploratory Analysis
+    </li>
     <li>Plotting</li>
     <li>Modelling
         <ul>Regression
@@ -28,22 +37,9 @@
 
 <div>
 
-
-
-    <form method="POST"  th:action="@{/load-dataset}"  th:object="${fileName}">
-
-        <div th:if="${#fields.hasErrors()}">
-            <span class="validationError">
-                Please correct the problems below and resubmit.
-            </span>
-        </div>
-
-        <input type="file" name="fileName" id="url"  th:field="*{fileName}"  required>
-
-
-        <button>Load</button>
-    </form>
 </div>
+    <button>Do Analysis</button>
+</form>
 
 </body>
 </html>

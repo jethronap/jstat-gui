@@ -1,6 +1,9 @@
 package detail;
 
+import detail.tasks.LoadDatatSetTask;
+
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 public class JStatGuiGlobalData {
 
@@ -14,4 +17,8 @@ public class JStatGuiGlobalData {
      * A set of worker pools used around
      */
     public static ExecutorService workersPool;
+
+
+    public static LoadDatatSetTask task = null; //new LoadDatatSetTask(file, JStatGuiGlobalData.dataSetContainer);
+    public static Future<JStateMessage> taskFuture = null;
 }

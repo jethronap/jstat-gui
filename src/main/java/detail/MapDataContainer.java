@@ -1,7 +1,6 @@
 package detail;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 
 public class MapDataContainer implements IDataSetContainer {
@@ -33,15 +32,26 @@ public class MapDataContainer implements IDataSetContainer {
      * Add a new data set in the container
      */
     @Override
-    public boolean addDataSet(IDataSet dataSet){
+    public synchronized boolean  addDataSet(IDataSet dataSet){
 
         // we wan this to be synchronized...
         // TODO: A task is reading a data set that already exists...
         // then we should not add...
-        synchronized (this) {
-            this.dataSetMap.put(dataSet.getName(), dataSet);
-            return true;
-        }
+        System.out.println("Adding dataSet "+dataSet.getName());
+
+        this.dataSetMap.put(dataSet.getName(), dataSet);
+        System.out.println("Added dataSet "+dataSet.getName());
+        return true;
+
+    }
+
+
+    /**
+     * Returns  a list of the loaded dataset names
+     */
+    @Override
+    public List<String> dataSetNames(){
+        return new ArrayList<>(this.dataSetMap.keySet());
     }
 
 

@@ -1,62 +1,74 @@
 package gui;
 
-import detail.FileWrapper;
-import detail.IDataSet;
-import detail.JStatGuiGlobalData;
-import detail.LoadDatatSetTask;
+import detail.*;
+import detail.wrappers.AnalysisFormWrapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.io.File;
+import java.util.List;
 
 @Controller
-@RequestMapping("/quit")
+@RequestMapping("/analysis")
 public class Analysis {
 
 
     @GetMapping
-    public String analysisView(){
+    public String analysisView(Model model){
+
+        //System.out.println("Loading dataset is still: "+JStatGuiGlobalData.taskFuture.toString());
 
         // in order to do an analysis we need the list
         // of datasets loaded
+        List<String> dataSetNames = JStatGuiGlobalData.dataSetContainer.dataSetNames();
+
+        if(dataSetNames.size() == 0){
+            dataSetNames.add("No datasets loaded");
+        }
+
+        model.addAttribute("dataSetNames", dataSetNames);
+
         return "analysis_index";
     }
 
     @PostMapping
-    public String exploreDataSet(@Valid FileWrapper fileName, Errors errors){
+    public String handleAnalysisForm(@Valid AnalysisFormWrapper formWrapper, Errors errors){
 
         // validate form
         if (errors.hasErrors()) {
             System.out.println("Form has errors...");
-            return "/load-dataset";
+            return "/analysis";
         }
 
+        if(formWrapper.eda != null){
+
+            this.computeDataSetStatistics(formWrapper);
+        }
+
+        // redirect to the analysis page again
+        return "redirect:/analysis";
+    }
+
+    protected void computeDataSetStatistics(AnalysisFormWrapper formWrapper){
+
 
         System.out.println("================");
-        System.out.println("exploreDataSet...");
+        System.out.println("computeDataSetStatistics...");
         System.out.println("================");
-        System.out.println("Filename exploreDataSet: "+fileName.fileName);
+        System.out.println("Filename exploreDataSet: "+formWrapper.eda);
+        System.out.println("Filename exploreDataSet: "+formWrapper.dataSetName);
 
         // get the name of the dataset
-        String datasetName="name";
-        IDataSet dataSet = JStatGuiGlobalData.dataSetContainer.getDataSet(datasetName);
+        String dataSetName = formWrapper.dataSetName;
+        IDataSet dataSet = JStatGuiGlobalData.dataSetContainer.getDataSet(dataSetName);
 
-        // now properly from the file
-        File file = new File("resources/datasets" + fileName.fileName);
+        // launch the task that does the analysis
 
-        // create the task that loads the data set
-        LoadDatatSetTask task = new LoadDatatSetTask(file, JStatGuiGlobalData.dataSetContainer);
-
-        //System.out.println("Number of threads used: "+JStatGuiGlobalData.workersPool.);
-
-        // submit it to the pool
-        JStatGuiGlobalData.workersPool.submit(task);
-
-        // redirect to the index page
-        return "redirect:/";
+        //// redirect to the analysis page again
+        //return "redirect:/analysis";
     }
 }
