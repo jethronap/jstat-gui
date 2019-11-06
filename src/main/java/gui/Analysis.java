@@ -42,7 +42,7 @@ public class Analysis {
         System.out.println("Filename exploreDataSet: "+fileName.fileName);
 
         // get the name of the dataset
-        String datasetName;
+        String datasetName="name";
         IDataSet dataSet = JStatGuiGlobalData.dataSetContainer.getDataSet(datasetName);
 
         // now properly from the file
