@@ -100,7 +100,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <title>Jstat Software</title>
 
     <div th:replace="fragments/header :: header-css"/>
 
@@ -113,6 +113,13 @@
 
     <div class="starter-template">
         <h1>Welcome to Jstat</h1>
+        <p>What would you like to do today?</p>
+    </div>
+    <div>
+        <ul>
+            <li><a th:href="@{/load-dataset}">Load Dataset</a></li>
+            <li><a th:href="@{/quit}">Quit</a></li>
+        </ul>
     </div>
 
 </div>
