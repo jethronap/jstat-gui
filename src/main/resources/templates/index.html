@@ -1,22 +1,124 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
 
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1"/>-->
+<!--    &lt;!&ndash; The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags &ndash;&gt;-->
+<!--    <meta name="description" content="">-->
+<!--    <meta name="author" content="">-->
+<!--    <link rel="icon" href="../../favicon.ico"/>-->
+
+<!--    <title>JState-Gui</title>-->
+
+<!--    &lt;!&ndash; Bootstrap core CSS &ndash;&gt;-->
+<!--    <link href="/static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div class="container">-->
+<!--    &lt;!&ndash; Static navbar &ndash;&gt;-->
+<!--    <nav class="navbar navbar-default">-->
+<!--        <div class="container-fluid">-->
+<!--            <div class="navbar-header">-->
+<!--                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"-->
+<!--                        aria-expanded="true" aria-controls="navbar">-->
+<!--                    <span class="sr-only">Toggle navigation</span>-->
+<!--                    <span class="icon-bar"></span>-->
+<!--                    <span class="icon-bar"></span>-->
+<!--                    <span class="icon-bar"></span>-->
+<!--                </button>-->
+<!--                <a class="navbar-brand" href="#" th:text="${username}">Jstat</a>-->
+<!--            </div>-->
+<!--            <div id="navbar" class="navbar-collapse collapse">-->
+<!--                <ul class="nav navbar-nav">-->
+<!--                    <li class="active"><a href="#">Home</a></li>-->
+<!--                    <li><a href="#">About</a></li>-->
+<!--                    <li><a href="#">Contact</a></li>-->
+<!--                    <li class="dropdown">-->
+<!--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"-->
+<!--                           aria-expanded="false">Dropdown <span class="caret"></span></a>-->
+<!--                        <ul class="dropdown-menu">-->
+<!--                            <li><a href="#">Action</a></li>-->
+<!--                            <li><a href="#">Another action</a></li>-->
+<!--                            <li><a href="#">Something else here</a></li>-->
+<!--                            <li role="separator" class="divider"></li>-->
+<!--                            <li class="dropdown-header">Nav header</li>-->
+<!--                            <li><a href="#">Separated link</a></li>-->
+<!--                            <li><a href="#">One more separated link</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                <ul class="nav navbar-nav navbar-right">-->
+<!--                    <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>-->
+<!--                    <li><a href="#">Static top</a></li>-->
+<!--                    <li><a href="#/">Fixed top</a></li>-->
+<!--                </ul>-->
+<!--            </div>&lt;!&ndash;/.nav-collapse &ndash;&gt;-->
+<!--        </div>&lt;!&ndash;/.container-fluid &ndash;&gt;-->
+<!--    </nav>-->
+<!--    &lt;!&ndash; Main component for a primary marketing message or call to action &ndash;&gt;-->
+<!--    <div class="jumbotron">-->
+<!--        &lt;!&ndash;Usage of models we wrote in WepAppController th:text="'Welcome to basic Bootstrap with Spring Boot created by ' + ${username} &ndash;&gt;-->
+<!--        <h3 th:text="'Welcome to Jstat"></h3>-->
+<!--        <p th:text="'The current date is  ' + ${#dates.format(datetime, 'dd MMM yyyy HH:mm')}"></p>-->
+<!--        <p> a software for performing basic statistical analysis and plotting.</p>-->
+<!--        <p>-->
+<!--            <a class="btn btn-lg btn-primary" href="#" role="button">See what you can do &raquo;</a>-->
+<!--        </p>-->
+<!--    </div>-->
+<!--</div> &lt;!&ndash; /container &ndash;&gt;-->
+<!--&lt;!&ndash; Bootstrap core JavaScript-->
+<!--================================================== &ndash;&gt;-->
+<!--&lt;!&ndash; Placed at the end of the document so the pages load faster &ndash;&gt;-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+<!--<script src="/static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>-->
+<!--&lt;!&ndash; IE10 viewport hack for Surface/desktop Windows 8 bug &ndash;&gt;-->
+<!--</body>-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>JState-Gui</title>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash; This is the header&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<div th:replace="views/header :: header"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;<h1>Welcome to JStat</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;<img th:src="@{/images/TacoCloud.png}"/>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <ul>&ndash;&gt;-->
+<!--&lt;!&ndash;        <li><a th:href="@{/quit}">Quit</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;        <li><a th:href="@{/load-dataset}">Load Dataset</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;    </ul>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--</html>-->
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>JState-Gui</title>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+
+    <div th:replace="fragments/header :: header-css"/>
+
 </head>
 <body>
-<!-- This is the header-->
-<h1>Welcome to JStat</h1>
-<img th:src="@{/images/TacoCloud.png}"/>
 
-<div>
-    <ul>
-        <li><a th:href="@{/quit}">Quit</a></li>
-        <li><a th:href="@{/load-dataset}">Load Dataset</a></li>
-    </ul>
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>Welcome to Jstat</h1>
+    </div>
+
 </div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
 </body>
 </html>

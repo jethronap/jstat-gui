@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(JstatGuiIndex.class)
+@WebMvcTest(JstatGuiIndexController.class)
 public class JStatGuiIndexTest {
 
     // inject MockMvc
@@ -27,7 +27,7 @@ public class JStatGuiIndexTest {
         mockMvc.perform(get("/")) // GET
                 .andExpect(status().isOk())  // Expects HTTP 200
                 .andExpect(view().name("index")) // Expects index view
-                .andExpect(content().string(containsString("Welcome to JStat"))); //Expects Welcome to...
+                .andExpect(content().string(containsString("Welcome to Jstat"))); //Expects Welcome to...
     }
 
 
