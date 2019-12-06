@@ -16,23 +16,14 @@ import java.util.Date;
 @Controller
 public class JstatGuiIndexController {
 
-    private String appMode;
-
-    @Autowired
-    public JstatGuiIndexController(Environment environment){
-        appMode = environment.getProperty("app-mode");
+    @GetMapping("/")
+    public String index(){
+        return "index";
     }
 
-    @GetMapping("/")
-    public String index(Model model){
-
-        model.addAttribute("datetime", new Date());
-        model.addAttribute("username", "User");
-        model.addAttribute("projectname", "JstatGUI");
-
-        model.addAttribute("mode", appMode);
-
-        return "index";
+    @GetMapping("/about")
+    public String about() {
+        return "about";
     }
 
 }
