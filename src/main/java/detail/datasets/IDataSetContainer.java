@@ -1,5 +1,7 @@
-package detail;
+package detail.datasets;
 
+
+import detail.datasets.IDataSet;
 
 import java.util.List;
 
@@ -29,5 +31,10 @@ public interface IDataSetContainer {
      * Returns  a list of the loaded dataset names
      */
     List<String> dataSetNames();
+
+    /**
+     * Clear whatever the data set  may contain
+     */
+    void clear();
 
 }

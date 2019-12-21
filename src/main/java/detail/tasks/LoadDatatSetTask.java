@@ -1,13 +1,12 @@
 package detail.tasks;
 
-import detail.IDataSet;
-import detail.IDataSetContainer;
+import detail.datasets.IDataSet;
+import detail.datasets.IDataSetContainer;
 import detail.JStateMessage;
-import detail.TableDataSet;
+import detail.datasets.TableDataSet;
 
 import java.io.File;
 import java.util.concurrent.Callable;
-import java.util.concurrent.RunnableFuture;
 
 public class LoadDatatSetTask implements Callable<JStateMessage> {
 

@@ -1,6 +1,8 @@
 package gui;
 
-import detail.*;
+import detail.compute.DescriptiveStatistics;
+import detail.config.JStatGuiGlobalData;
+import detail.datasets.IDataSet;
 import detail.wrappers.AnalysisFormWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +46,7 @@ public class Analysis {
             return "/analysis";
         }
 
+        // compute descriptive statistics
         if(formWrapper.eda != null){
 
             this.computeDataSetStatistics(formWrapper);
@@ -65,6 +68,11 @@ public class Analysis {
         // get the name of the dataset
         String dataSetName = formWrapper.dataSetName;
         IDataSet dataSet = JStatGuiGlobalData.dataSetContainer.getDataSet(dataSetName);
+
+        for(int row=0; row<dataSet.size(); ++row){
+
+            DescriptiveStatistics statistics = DescriptiveStatistics.compute(dataSet.getItem(row));
+        }
 
         // launch the task that does the analysis
 

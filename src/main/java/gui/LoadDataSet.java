@@ -2,7 +2,7 @@ package gui;
 
 import detail.wrappers.FileWrapper;
 import detail.tasks.LoadDatatSetTask;
-import detail.JStatGuiGlobalData;
+import detail.config.JStatGuiGlobalData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;

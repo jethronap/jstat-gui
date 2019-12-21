@@ -1,6 +1,8 @@
-package detail;
+package detail.datasets;
 
+import detail.datasets.IDataSet;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.columns.Column;
 import tech.tablesaw.io.csv.CsvReadOptions;
 
 import java.io.File;
@@ -9,7 +11,7 @@ import java.io.IOException;
 /**
  * Wrapper to the Tablesaw Table class
  */
-public class TableDataSet implements IDataSet {
+public class TableDataSet implements IDataSet<Column> {
 
     /**
      * Returns the name of the data set
@@ -18,10 +20,10 @@ public class TableDataSet implements IDataSet {
         return dataSet.name();
     }
 
-
     /**
      * Load the data set from the given filename
      */
+    @Override
     public void loadFrom(File fileName){
 
         File file = new File(fileName.getAbsolutePath());
@@ -34,10 +36,25 @@ public class TableDataSet implements IDataSet {
             System.out.println("An excpetion was thrown: "+e.toString());
             //throw new IOException(e.getCause());
         }
-
-
     }
 
+    /**
+     * Returns the characterizing size of the data set.
+     * The characterizing size is typically the size
+     * that allows us to loop over the data set
+     */
+    @Override
+    public int size(){
+        return this.dataSet.columnCount();
+    }
+
+    /**
+     * Returns the i-th data
+     */
+    @Override
+    public Column getItem(int i){
+        return this.dataSet.column(i);
+    }
 
     private Table dataSet;
 }
