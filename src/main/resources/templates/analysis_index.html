@@ -9,29 +9,48 @@
 <form method="POST" th:action="@{/analysis}">
 
 <ul>
+
+    <li>Select Analysis Type</li>
+    <ul>
+        <li>
+            <input name="eda" type="radio" value="exploratory_analysis" /> Exploratory Analysis
+        </li>
+        <li>
+            <input name="plotting" type="radio" value="plot" /> Plot
+        </li>
+        <li>Modelling
+            <ul>Regression
+                <li>
+                    <input name="regression" type="radio" value="linear_regression" /> Linear Regression
+                </li>
+                <li>
+                    <input name="regression" type="radio" value="non_linear_regression" /> Non Linear Regression
+                </li>
+            </ul>
+            <ul>Classification
+                <li>
+                    <input name="classification" type="radio" value="logistic_regression" /> Logistic Regression
+                </li>
+            </ul>
+            <ul>Clustering
+                <li>
+                    <input name="clustering" type="radio" value="kmeans" /> KMeans
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+
     <li>Select active dataset</li>
     <p>This should be a list of loaded datasets</p>
 
-    <div th:each="setName: ${dataSetNames}">
-        <input name="dataSetName" type="radio" th:text="${setName}"  th:value="${setName}" required/>
+    <div th:each="set : ${dataSets}">
+        <input name="dataSetName" type="radio" th:text="${set.name}"  th:value="${set.name}" required/>
+        <select th:id="${set.name}" name="colName">
+            <option th:each="value : ${set.names}" th:value="${value}" th:text="${value}" ></option>
+        </select>
     </div>
 
-
-    <li>
-        <input name="eda" type="radio" value="Exploratory Analysis" /> Exploratory Analysis
-    </li>
-    <li>Plotting</li>
-    <li>Modelling
-        <ul>Regression
-            <li>Linear Regression</li>
-        </ul>
-        <ul>Classification
-            <li>Logistic Regression</li>
-        </ul>
-        <ul>Clustering
-            <li>KMeans</li>
-        </ul>
-    </li>
 </ul>
 
 

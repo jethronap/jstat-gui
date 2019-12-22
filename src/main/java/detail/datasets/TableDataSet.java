@@ -7,6 +7,7 @@ import tech.tablesaw.io.csv.CsvReadOptions;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Wrapper to the Tablesaw Table class
@@ -54,6 +55,16 @@ public class TableDataSet implements IDataSet<Column> {
     @Override
     public Column getItem(int i){
         return this.dataSet.column(i);
+    }
+
+
+    /**
+     * Returns a list with the column names
+     */
+    @Override
+    public List<String> getColumnNames(){
+
+        return this.dataSet.columnNames();
     }
 
     private Table dataSet;

@@ -1,6 +1,7 @@
 package detail.datasets;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * General interface to model a data set
@@ -25,9 +26,20 @@ public interface IDataSet<ItemTp> {
      */
     ItemTp getItem(int i);
 
+    /**
+     * Returns the data item associated with the given name
+     */
+    ItemTp getItem(String name);
+
 
     /**
      * Load the data set from the given filename
      */
     void loadFrom(File fileName);
+
+
+    /**
+     * Returns a list with the column names
+     */
+    List<String> getColumnNames();
 }
