@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form method="POST" th:action="@{/analysis}">
+<form method="POST" th:action="@{/analysis}" target="_blank">
 
 <ul>
 
@@ -21,20 +21,20 @@
         <li>Modelling
             <ul>Regression
                 <li>
-                    <input name="regression" type="radio" value="linear_regression" /> Linear Regression
+                    <input name="linear_regression" type="radio" value="linear_regression" /> Linear Regression
                 </li>
                 <li>
-                    <input name="regression" type="radio" value="non_linear_regression" /> Non Linear Regression
+                    <input name="non_linear_regression" type="radio" value="non_linear_regression" /> Non Linear Regression
                 </li>
             </ul>
             <ul>Classification
                 <li>
-                    <input name="classification" type="radio" value="logistic_regression" /> Logistic Regression
+                    <input name="logistic_regression" type="radio" value="logistic_regression" /> Logistic Regression
                 </li>
             </ul>
             <ul>Clustering
                 <li>
-                    <input name="clustering" type="radio" value="kmeans" /> KMeans
+                    <input name="kmeans_clustering" type="radio" value="kmeans" /> KMeans
                 </li>
             </ul>
         </li>

@@ -2,14 +2,15 @@ package detail.compute;
 
 public class DescriptiveStatistics {
 
+    public String name;
     public double mean;
     public double variance;
     public double median;
 
-    public static <SampleTp> DescriptiveStatistics compute(SampleTp sample){
+    public <SampleTp> void  compute(SampleTp sample){
 
-        DescriptiveStatistics statistics = new DescriptiveStatistics();
+        //DescriptiveStatistics statistics = new DescriptiveStatistics();
 
-        return statistics;
+        //return statistics;
     }
 }

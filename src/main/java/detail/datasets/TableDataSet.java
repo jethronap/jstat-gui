@@ -59,6 +59,15 @@ public class TableDataSet implements IDataSet<Column> {
 
 
     /**
+     * Returns the data item associated with the given name
+     */
+    @Override
+    public Column getItem(String name){
+        return this.dataSet.column(name);
+    }
+
+
+    /**
      * Returns a list with the column names
      */
     @Override

@@ -4,6 +4,9 @@ import detail.compute.DescriptiveStatistics;
 import detail.config.JStatGuiGlobalData;
 import detail.datasets.DataSetViewInfoHolder;
 import detail.datasets.IDataSet;
+import detail.tasks.ComputeDescriptiveStatisticsTask;
+import detail.tasks.LoadDatatSetTask;
+import detail.tasks.TaskBase;
 import detail.wrappers.AnalysisFormWrapper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
@@ -57,7 +60,6 @@ public class Analysis {
         }
 
         model.addAttribute("dataSets", dataSets);
-
         return "analysis_index";
     }
 
@@ -70,14 +72,32 @@ public class Analysis {
             return "/analysis";
         }
 
-        // compute descriptive statistics
+        // Try to figure out what sort of
+        // analysis we want to do
         if(formWrapper.eda != null){
 
             this.computeDataSetStatistics(formWrapper);
         }
+        else if(formWrapper.linear_regression != null){
+
+        }
+        else if(formWrapper.non_linear_regression != null){
+
+        }
+        else if(formWrapper.logistic_regression != null){
+
+        }
+        else if(formWrapper.kmeans_clustering != null){
+
+        }
+        else{
+
+            // return an error message that no valid action
+            // was selected
+        }
 
         // redirect to the analysis page again
-        return "redirect:/analysis";
+        return "redirect:/analysis-result?taskName=" + "Mean";
     }
 
     protected void computeDataSetStatistics(AnalysisFormWrapper formWrapper){
@@ -96,12 +116,25 @@ public class Analysis {
 
         if(formWrapper.colName == "All"){
 
-            
+            List<String> dataSetCols = dataSet.getColumnNames();
+            String[] names = new String[dataSetCols.size()];
+
+            for(int i=0; i<names.length; ++i){
+                names[i] = dataSetCols.get(i);
+            }
+
+            // submit it to the pool
+            TaskBase task = new ComputeDescriptiveStatisticsTask("Mean", dataSet, names);
+            JStatGuiGlobalData.workersPool.submit(task);
+            JStatGuiGlobalData.tasks.add(task);
+
         }
         else{
 
-            /// just the column requested
-            DescriptiveStatistics statistics = DescriptiveStatistics.compute(dataSet.getItem(formWrapper.colName));
+            // submit it to the pool
+            TaskBase task = new ComputeDescriptiveStatisticsTask("Mean", dataSet, formWrapper.colName);
+            JStatGuiGlobalData.workersPool.submit(task);
+            JStatGuiGlobalData.tasks.add(task);
         }
     }
 }
