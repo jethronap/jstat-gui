@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>JStat Analysis Result</title>
+</head>
+<body>
+
+<form method="POST" th:action="@{/analysis-result(taskName=${taskName})}">
+    <button>Get Result</button>
+</form>
+
+<div th:each="result : ${results}">
+
+    <p>"${result.name}"</p>
+
+    <p>Mean: "${result.mean}"</p>
+    <p>Median: "${result.median}"</p>
+    <p>Variance: "${result.variance}"</p>
+</div>
+
+</body>
+</html>
