@@ -1,11 +1,12 @@
 package gui;
 
-import detail.JStatGuiGlobalData;
-import detail.MapDataContainer;
+import detail.config.JStatGuiGlobalData;
+import detail.config.JStatInitialize;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.concurrent.Executors;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 
 /**
@@ -15,17 +16,20 @@ import java.util.concurrent.Executors;
  *
  */
 @SpringBootApplication
+@EnableAsync
 public class JStatGuiApplication {
+
+    @Bean("threadPoolTaskExecutor")
+    public TaskExecutor getAsyncExecutor() {
+
+        return JStatGuiGlobalData.workersPool;
+    }
 
     public static void main(String[] args) {
 
         // do the needed initializations
-
-        // global object holding the loaded data sets
-        JStatGuiGlobalData.dataSetContainer = new MapDataContainer();
-
-        // the worker pool
-        JStatGuiGlobalData.workersPool = Executors.newFixedThreadPool(5);
+        JStatInitialize.initializeDataContainer();
+        JStatInitialize.initializeWorkerPool();
 
 
         if(JStatGuiGlobalData.workersPool == null){
@@ -33,11 +37,6 @@ public class JStatGuiApplication {
         }
 
         SpringApplication.run(JStatGuiApplication.class, args);
-
-        //System.out.println("Terminating...");
-
-        // once the app stops shutdown the threads
-        //JStatGuiGlobalData.workersPool.shutdown();
     }
 
 }

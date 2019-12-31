@@ -1,8 +1,12 @@
-package detail;
+package detail.tasks;
+
+import detail.datasets.IDataSet;
+import detail.datasets.IDataSetContainer;
+import detail.JStateMessage;
+import detail.datasets.TableDataSet;
 
 import java.io.File;
 import java.util.concurrent.Callable;
-import java.util.concurrent.RunnableFuture;
 
 public class LoadDatatSetTask implements Callable<JStateMessage> {
 
@@ -22,11 +26,11 @@ public class LoadDatatSetTask implements Callable<JStateMessage> {
     public JStateMessage call()throws Exception{
 
         // reade the dataSet
-        dataSet = new TableDataSet();
-        dataSet.loadFrom(file);
+        this.dataSet = new TableDataSet();
+        this.dataSet.loadFrom(file);
 
         // we loaded the dataSet
-        container.addDataSet(dataSet);
+        container.addDataSet(this.dataSet);
 
         // no notify the Messaging that
         msg = new JStateMessage("Data set "+dataSet.getName()+" is loaded");
