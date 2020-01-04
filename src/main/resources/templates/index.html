@@ -1,30 +1,38 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Jstat Software</title>
 
-<head>
-    <meta charset="UTF-8">
-    <title>JState-Gui</title>
+    <div th:replace="fragments/header :: header-css"/>
+
 </head>
 <body>
-<!-- This is the header-->
-<h1>Welcome to JStat</h1>
-<img th:src="@{/images/TacoCloud.png}"/>
 
-<div>
-    <ul>
-        <li>File
-            <ul>
-                <li><a th:href="@{/quit}">Quit</a></li>
-            </ul>
+<div th:replace="fragments/header :: header"/>
 
-        </li>
+<div class="container">
 
-        <li><a th:href="@{/load-dataset}">Load Dataset</a></li>
-        <li><a th:href="@{/analysis}">Analysis</a></li>
+    <div class="starter-template">
+        <h1>Welcome to Jstat</h1>
+        <p>What would you like to do today?</p>
+    </div>
+    <div>
+        <ul>
+            <li><a th:href="'mailto:' + ${'someone@jstat.org'}">Say Hi</a></li>
+            <li><a th:href="@{/about}">Learn About Us</a></li>
+        </ul>
+    </div>
+    <div><p>Or</p></div>
+    <div>
+        <ul>
+            <li><a th:href="@{/analysis}">Do Some Analysis</a></li>
+        </ul>
+    </div>
 
-    </ul>
 </div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
 </body>
 </html>
