@@ -60,7 +60,7 @@ public class Analysis {
         }
 
         model.addAttribute("dataSets", dataSets);
-        return "analysis_index";
+        return "analysis";
     }
 
     @PostMapping

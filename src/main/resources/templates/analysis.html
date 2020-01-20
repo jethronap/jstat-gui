@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>JStat Analysis</title>
+    <div th:replace="fragments/header :: header-css"/>
 </head>
 <body>
 
-<form method="POST" th:action="@{/analysis}" target="_blank">
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+
+<form method="POST" target="_blank" th:action="@{/analysis}">
 
 <ul>
 
@@ -45,9 +50,9 @@
     <p>This should be a list of loaded datasets</p>
 
     <div th:each="set : ${dataSets}">
-        <input name="dataSetName" type="radio" th:text="${set.name}"  th:value="${set.name}" required/>
-        <select th:id="${set.name}" name="colName">
-            <option th:each="value : ${set.names}" th:value="${value}" th:text="${value}" ></option>
+        <input name="dataSetName" required th:text="${set.name}"  th:value="${set.name}" type="radio"/>
+        <select name="colName" th:id="${set.name}">
+            <option th:each="value : ${set.names}" th:text="${value}" th:value="${value}" ></option>
         </select>
     </div>
 
@@ -57,8 +62,15 @@
 <div>
 
 </div>
-    <button>Do Analysis</button>
+    <p><input type="submit" value="Do Analysis" class="btn btn-primary" role="button"></p>
 </form>
+
+    </div>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
 
 </body>
 </html>
