@@ -11,59 +11,58 @@
 
     <div class="starter-template">
 
-<form method="POST" target="_blank" th:action="@{/analysis}">
+        <form method="POST" target="_blank" th:action="@{/analysis}">
 
-<ul>
+            <ul class="list-datasets">
+                <li>Select an active data set</li>
 
-    <li>Select Analysis Type</li>
-    <ul>
-        <li>
-            <input name="eda" type="radio" value="exploratory_analysis" /> Exploratory Analysis
-        </li>
-        <li>
-            <input name="plotting" type="radio" value="plot" /> Plot
-        </li>
-        <li>Modelling
-            <ul>Regression
+                <div th:each="set : ${dataSets}">
+                    <input name="dataSetName" required th:text="${set.name}" th:value="${set.name}" type="checkbox"/>
+                    <select name="colName" th:id="${set.name}">
+                        <option th:each="value : ${set.names}" th:text="${value}" th:value="${value}"></option>
+                    </select>
+                </div>
+            </ul>
+
+            <ul class="list-analysis">
+                <li>Select Analysis Type</li>
                 <li>
-                    <input name="linear_regression" type="radio" value="linear_regression" /> Linear Regression
+                    <input name="eda" type="checkbox" value="exploratory_analysis"/> Exploratory Analysis
                 </li>
                 <li>
-                    <input name="non_linear_regression" type="radio" value="non_linear_regression" /> Non Linear Regression
+                    <input name="plotting" type="checkbox" value="plot"/> Plot
+                </li>
+                <li>Modelling
+                    <ul>Regression
+                        <li>
+                            <input name="linear_regression" type="checkbox" value="linear_regression"/> Linear
+                            Regression
+                        </li>
+                        <li>
+                            <input name="non_linear_regression" type="checkbox" value="non_linear_regression"/> Non
+                            Linear Regression
+                        </li>
+                    </ul>
+                    <ul>Classification
+                        <li>
+                            <input name="logistic_regression" type="checkbox" value="logistic_regression"/> Logistic
+                            Regression
+                        </li>
+                    </ul>
+                    <ul>Clustering
+                        <li>
+                            <input name="kmeans_clustering" type="checkbox" value="kmeans"/> KMeans
+                        </li>
+                    </ul>
                 </li>
             </ul>
-            <ul>Classification
-                <li>
-                    <input name="logistic_regression" type="radio" value="logistic_regression" /> Logistic Regression
-                </li>
-            </ul>
-            <ul>Clustering
-                <li>
-                    <input name="kmeans_clustering" type="radio" value="kmeans" /> KMeans
-                </li>
-            </ul>
-        </li>
-    </ul>
 
 
-    <li>Select active dataset</li>
-    <p>This should be a list of loaded datasets</p>
+            <div>
 
-    <div th:each="set : ${dataSets}">
-        <input name="dataSetName" required th:text="${set.name}"  th:value="${set.name}" type="radio"/>
-        <select name="colName" th:id="${set.name}">
-            <option th:each="value : ${set.names}" th:text="${value}" th:value="${value}" ></option>
-        </select>
-    </div>
-
-</ul>
-
-
-<div>
-
-</div>
-    <p><input type="submit" value="Do Analysis" class="btn btn-primary" role="button"></p>
-</form>
+            </div>
+            <p><input type="submit" value="Do Analysis" class="btn btn-secondary" role="button"></p>
+        </form>
 
     </div>
 
