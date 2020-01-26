@@ -3,13 +3,9 @@ package detail.tasks;
 import detail.JStateMessage;
 import detail.compute.DescriptiveStatistics;
 import detail.datasets.IDataSet;
-import detail.datasets.IDataSetContainer;
-import detail.datasets.TableDataSet;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 /**
  * Compute the descriptive statistics of the columns from the given
