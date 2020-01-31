@@ -61,7 +61,7 @@ public class AnalysisResult {
         }
 
         model.addAttribute("dataSets", dataSets);*/
-        return "analysis-result-descriptive-stats";
+        return "analysis_result_descriptive_stats";
     }
 
     @PostMapping

@@ -10,7 +10,7 @@
 <div class="container">
 
 <form method="POST" th:action="@{/analysis-result(taskName=${taskName})}">
-    <button>Get Result</button>
+    <p><input type="submit" value="Get Results" class="btn btn-secondary" role="button"></p>
 </form>
 
 <div th:each="result : ${results}">

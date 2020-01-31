@@ -1,6 +1,9 @@
 package detail.compute;
 
 
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.apache.commons.math3.stat.descriptive.rank.Median;
+
 public class DescriptiveStats {
 
     public String name;
@@ -10,9 +13,12 @@ public class DescriptiveStats {
 
     public <SampleTp> void  compute(SampleTp sample){
 
-        //DescriptiveStats statistics = new DescriptiveStats();
+        DescriptiveStatistics statistics = new DescriptiveStatistics();
 
+        //statistics.addValue(sample);
+//        this.mean = statistics.getMean();
+//        this.variance = statistics.getVariance();
+//        this.median = new Median().evaluate();
         //mean = statistics.getMean();
-        //return statistics;
     }
 }
