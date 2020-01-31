@@ -22,3 +22,8 @@ By default MongoDB uses the 27017 port on localhost.
 application is using, the url and the and port. Change there accordingly or leave the defaults 
 
 Note that an instance of ```mongod``` should be running in order to read/write to the DB.
+
+### Some Issues With MongoDB
+
+- https://stackoverflow.com/questions/40099847/error-creating-bean-with-name-mongotemplate-while-connecting-mongodb-through-s/54516317
+
