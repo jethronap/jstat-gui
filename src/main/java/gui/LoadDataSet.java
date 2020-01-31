@@ -1,7 +1,7 @@
 package gui;
 
 import detail.wrappers.FileWrapper;
-import detail.tasks.LoadDatatSetTask;
+import detail.tasks.LoadDataSetTask;
 import detail.config.JStatGuiGlobalData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +30,7 @@ public class LoadDataSet {
         // validate form
         if (errors.hasErrors()) {
             System.out.println("Form has errors...");
-            return "/load-dataset";
+            return "load-dataset";
         }
 
         // these should be logged better...
@@ -43,7 +43,7 @@ public class LoadDataSet {
         File file = new File("src/main/resources/datasets/" + fileName.fileName);
 
         // submit it to the pool
-        JStatGuiGlobalData.workersPool.submit(new LoadDatatSetTask(file, JStatGuiGlobalData.dataSetContainer));
+        JStatGuiGlobalData.workersPool.submit(new LoadDataSetTask(file, JStatGuiGlobalData.dataSetContainer));
 
         // redirect to the index page
         return "redirect:/";
