@@ -1,6 +1,7 @@
 package detail.compute;
 
-public class DescriptiveStatistics {
+
+public class DescriptiveStats {
 
     public String name;
     public double mean;
@@ -9,8 +10,9 @@ public class DescriptiveStatistics {
 
     public <SampleTp> void  compute(SampleTp sample){
 
-        //DescriptiveStatistics statistics = new DescriptiveStatistics();
+        //DescriptiveStats statistics = new DescriptiveStats();
 
+        //mean = statistics.getMean();
         //return statistics;
     }
 }

@@ -1,7 +1,7 @@
 package detail.tasks;
 
 import detail.JStateMessage;
-import detail.compute.DescriptiveStatistics;
+import detail.compute.DescriptiveStats;
 import detail.datasets.IDataSet;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class ComputeDescriptiveStatisticsTask extends TaskBase {
         stats = new ArrayList<>();
         for(String name : this.names){
 
-            DescriptiveStatistics statistics = new DescriptiveStatistics();
+            DescriptiveStats statistics = new DescriptiveStats();
             statistics.name = name;
             statistics.compute(this.dataSet.getItem(name));
             stats.add(statistics);
@@ -45,13 +45,13 @@ public class ComputeDescriptiveStatisticsTask extends TaskBase {
     /**
      * Return the result of the task
      */
-    List<DescriptiveStatistics> getResult(){return this.stats;}
+    List<DescriptiveStats> getResult(){return this.stats;}
 
     /**
      * Return the result. It waits the specified amount of time
      * if the task is not finished
      */
-    List<DescriptiveStatistics> getResultOrWait(int time){
+    List<DescriptiveStats> getResultOrWait(int time){
 
         if(!this.finished()){
 
@@ -81,6 +81,6 @@ public class ComputeDescriptiveStatisticsTask extends TaskBase {
     /**
      * Map that holds the statistics for every column
      */
-    List<DescriptiveStatistics> stats;
+    List<DescriptiveStats> stats;
 
 }

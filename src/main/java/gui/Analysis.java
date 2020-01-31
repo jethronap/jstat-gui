@@ -1,14 +1,11 @@
 package gui;
 
-import detail.compute.DescriptiveStatistics;
 import detail.config.JStatGuiGlobalData;
 import detail.datasets.DataSetViewInfoHolder;
 import detail.datasets.IDataSet;
 import detail.tasks.ComputeDescriptiveStatisticsTask;
-import detail.tasks.LoadDatatSetTask;
 import detail.tasks.TaskBase;
 import detail.wrappers.AnalysisFormWrapper;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -18,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/analysis")
