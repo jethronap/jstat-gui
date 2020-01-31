@@ -1,6 +1,8 @@
+[![Build Status](https://travis-ci.com/jethronap/jstat-gui.svg?branch=master)](https://travis-ci.com/jethronap/jstat-gui)
+
 # jstat-gui
 
-Web-based GUI application for jstat.
+Spring-based GUI application for <a href="https://github.com/jethronap/jstat">```jstat```</a>.
 
 ## Dependencies
 
@@ -9,5 +11,3 @@ Web-based GUI application for jstat.
 
 ## Setting Up MongoDB
 
-### Some Issues With MongoDB
-- https://stackoverflow.com/questions/40099847/error-creating-bean-with-name-mongotemplate-while-connecting-mongodb-through-s/54516317
