@@ -9,14 +9,14 @@
 
 <div class="container">
 
-    <div th:text="${taskName}">
+    <h4 th:text="${taskName}">
 
         <!--    <p th:text="${taskName}"></p>-->
 
         <!--    <p>Mean: "${result.mean}"</p>-->
         <!--    <p>Median: "${result.median}"</p>-->
         <!--    <p>Variance: "${result.variance}"</p>-->
-    </div>
+    </h4>
     <form method="POST" th:action="@{/analysis-result(taskName=${taskName})}">
         <p><input type="submit" value="Get Results" class="btn btn-secondary" role="button"></p>
     </form>
