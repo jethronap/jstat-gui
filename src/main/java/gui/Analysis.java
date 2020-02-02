@@ -119,7 +119,7 @@ public class Analysis {
             }
 
             // submit it to the pool
-            TaskBase task = new ComputeDescriptiveStatisticsTask("Mean", dataSet, names);
+            TaskBase task = new ComputeDescriptiveStatisticsTask("EDA", dataSet, names);
             JStatGuiGlobalData.workersPool.submit(task);
             JStatGuiGlobalData.tasks.add(task);
 
@@ -127,7 +127,7 @@ public class Analysis {
         else{
 
             // submit it to the pool
-            TaskBase task = new ComputeDescriptiveStatisticsTask("Mean", dataSet, formWrapper.colName);
+            TaskBase task = new ComputeDescriptiveStatisticsTask("EDA", dataSet, formWrapper.colName);
             JStatGuiGlobalData.workersPool.submit(task);
             JStatGuiGlobalData.tasks.add(task);
         }
