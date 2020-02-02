@@ -92,7 +92,7 @@ public class Analysis {
         }
 
         // redirect to the analysis page again
-        return "redirect:/analysis-result?taskName=" + "Mean";
+        return "redirect:/analysis-result?taskName=" + "EDA";
     }
 
     protected void computeDataSetStatistics(AnalysisFormWrapper formWrapper){
