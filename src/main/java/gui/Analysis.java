@@ -12,6 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ public class Analysis {
     }
 
     @PostMapping
-    public String handleAnalysisForm(@Valid AnalysisFormWrapper formWrapper, Errors errors){
+    public String handleAnalysisForm(/*@RequestParam("taskName") String taskName,*/ @Valid AnalysisFormWrapper formWrapper, Errors errors){
 
         // validate form
         if (errors.hasErrors()) {
@@ -72,6 +73,7 @@ public class Analysis {
         if(formWrapper.eda != null){
 
             this.computeDataSetStatistics(formWrapper);
+            return "redirect:/analysis-result?taskName=" + "EDA";
         }
         else if(formWrapper.linear_regression != null){
 
@@ -92,7 +94,7 @@ public class Analysis {
         }
 
         // redirect to the analysis page again
-        return "redirect:/analysis-result?taskName=" + "EDA";
+        return "redirect:/analysis";
     }
 
     protected void computeDataSetStatistics(AnalysisFormWrapper formWrapper){
