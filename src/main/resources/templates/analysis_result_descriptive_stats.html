@@ -9,18 +9,17 @@
 
 <div class="container">
 
-<form method="POST" th:action="@{/analysis-result(taskName=${taskName})}">
-    <p><input type="submit" value="Get Results" class="btn btn-secondary" role="button"></p>
-</form>
+    <div th:text="${taskName}">
 
-<div th:each="result : ${results}">
+        <!--    <p th:text="${taskName}"></p>-->
 
-    <p>"${result.name}"</p>
-
-    <p>Mean: "${result.mean}"</p>
-    <p>Median: "${result.median}"</p>
-    <p>Variance: "${result.variance}"</p>
-</div>
+        <!--    <p>Mean: "${result.mean}"</p>-->
+        <!--    <p>Median: "${result.median}"</p>-->
+        <!--    <p>Variance: "${result.variance}"</p>-->
+    </div>
+    <form method="POST" th:action="@{/analysis-result(taskName=${taskName})}">
+        <p><input type="submit" value="Get Results" class="btn btn-secondary" role="button"></p>
+    </form>
 
 </div>
 <!-- /.container -->
