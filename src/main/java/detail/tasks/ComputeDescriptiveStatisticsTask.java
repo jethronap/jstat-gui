@@ -2,6 +2,7 @@ package detail.tasks;
 
 import detail.JStateMessage;
 import detail.compute.DescriptiveStats;
+import detail.compute.NumericSample;
 import detail.datasets.IDataSet;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class ComputeDescriptiveStatisticsTask extends TaskBase {
 
             DescriptiveStats statistics = new DescriptiveStats();
             statistics.name = name;
-            statistics.compute(this.dataSet.getItem(name));
+            statistics.compute((NumericSample) this.dataSet.getItem(name));
             stats.add(statistics);
         }
 
