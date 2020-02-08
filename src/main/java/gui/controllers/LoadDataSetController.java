@@ -1,4 +1,4 @@
-package gui;
+package gui.controllers;
 
 import detail.wrappers.FileWrapper;
 import detail.tasks.LoadDataSetTask;
@@ -15,7 +15,7 @@ import java.io.File;
 
 @Controller
 @RequestMapping("/load-dataset")
-public class LoadDataSet {
+public class LoadDataSetController {
 
     @GetMapping
     public String loadDataSet(Model model){

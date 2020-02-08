@@ -1,4 +1,4 @@
-package gui;
+package gui.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;

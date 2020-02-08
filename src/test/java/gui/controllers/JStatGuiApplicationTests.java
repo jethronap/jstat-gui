@@ -1,4 +1,4 @@
-package gui;
+package gui.controllers;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

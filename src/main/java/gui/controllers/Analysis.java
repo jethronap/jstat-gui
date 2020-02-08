@@ -1,4 +1,4 @@
-package gui;
+package gui.controllers;
 
 import detail.config.JStatGuiGlobalData;
 import detail.datasets.DataSetViewInfoHolder;
