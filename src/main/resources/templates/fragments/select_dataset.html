@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+<div th:fragment="select_dataset">
+
+    <div class="container">
+
+        <div class="jumbotron">
+            <h4 class="display-4">Select an active data set</h4>
+            <hr class="my-4">
+            <div th:each="set : ${dataSets}" >
+                <input name="dataSetName" required th:text="${set.name}" th:value="${set.name}" type="checkbox"/>
+                <select name="colName" th:id="${set.name}">
+                    <option th:each="value : ${set.names}" th:text="${value}" th:value="${value}"></option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
