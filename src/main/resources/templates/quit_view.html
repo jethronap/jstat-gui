@@ -7,14 +7,16 @@
 
 <div th:replace="fragments/header :: header"/>
 
-<div class="container">
+<div class="jumbotron">
 
-    <div class="starter-template">
+    <div class="container">
 
-    <form method="POST"  th:action="@{/quit}">
-        <p>Confirm you want to quit JStat</p>
-        <p><input type="submit" value="Confirm" class="btn btn-danger" role="button"></p>
-    </form>
+        <form method="POST" th:action="@{/quit}">
+            <p class="lead">Do you you want to quit JStat?</p>
+            <p>Just press the button below</p>
+            <hr class="my-4">
+            <button type="submit" class="btn btn-danger">Confirm</button>
+        </form>
     </div>
 
 </div>
