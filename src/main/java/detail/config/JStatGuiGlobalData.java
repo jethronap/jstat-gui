@@ -40,8 +40,9 @@ public class JStatGuiGlobalData {
 
     public static TaskBase getTask(String name){
         boolean found = false;
-
+        System.out.println("looking for task name:"+ name);
         for(int i=0; i<tasks.size(); ++i ){
+            System.out.println(tasks.get(i).getTaskName());
             if(tasks.get(i).getTaskName().equals(name)){
                 return tasks.get(i);
             }
