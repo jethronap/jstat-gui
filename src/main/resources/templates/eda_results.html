@@ -10,10 +10,10 @@
 <div class="container">
 
     <div th:replace="fragments/select_dataset"/>
-    <h4 th:text="${taskName}"></h4>
+    <h4 class="display-4" th:text="${taskName}"></h4>
 
-    <form method="POST" th:action="@{/analysis-result(taskName=${taskName})}">
-        <p><input type="submit" value="Get Results" class="btn btn-secondary" role="button"></p>
+    <form method="POST" action="#" th:action="@{/eda_results}">
+        <p><button type="submit" class="btn btn-secondary">Get Results</button></p>
 
     </form>
 
