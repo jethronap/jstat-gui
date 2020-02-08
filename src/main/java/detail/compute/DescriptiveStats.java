@@ -14,10 +14,12 @@ public class DescriptiveStats {
     public StatisticsWrapper statisticsWrapper;
     //public IDataSet dataSet;
     //public Column sample;
+    public double mean;
 
-    public void compute(NumericSample sample) {
+    public<SampleTp> void compute(SampleTp sample) {
 
-        sample.getStatistics();
+
+//        sample.getStatistics();
         //this.sample = sample;
         //sample = new NumericSample(dataSet.getName(), 0);
 //        DescriptiveStatistics statistics = new DescriptiveStatistics();
@@ -27,5 +29,12 @@ public class DescriptiveStats {
 
 
   //      sample.getStatistics();
+    }
+    public void compute(Column sample) {
+
+        Object[] data = sample.asObjectArray();
+        NumericSample numericSample = new NumericSample(data);
+        statisticsWrapper = numericSample.getStatistics();
+
     }
 }
