@@ -40,6 +40,13 @@ public class NumericSample {
         copy(data);
     }
 
+    public NumericSample(Object[] data) {
+        this.data = new ArrayList<Double>();
+
+        for (int i = 0; i < data.length; i++) {
+            this.add((Double) data[i]);
+        }
+    }
 
     /**
      * The name of the sample
