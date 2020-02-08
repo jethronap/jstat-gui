@@ -15,10 +15,11 @@
 
     <nav class="navbar fixed-bottom navbar-dark bg-dark">
 
-            <!-- this is the footer -->
-            <p th:text="'CopyLeft Jstat - ' + ${#dates.format(#dates.createNow(), 'MMM yyyy')}"></p>
-            <script type="text/javascript"
-                    src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!-- this is the footer -->
+        <span>&copy;</span>
+        <p th:text="'CopyLeft Jstat - ' + ${#dates.format(#dates.createNow(), 'MMM yyyy')}"></p>
+        <script type="text/javascript"
+                src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </nav>
 
 </div>
