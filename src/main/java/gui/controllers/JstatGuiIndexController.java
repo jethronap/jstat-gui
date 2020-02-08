@@ -26,4 +26,9 @@ public class JstatGuiIndexController {
         return "about";
     }
 
+    @GetMapping("/analysis")
+    public String analysis() {
+        return "analysis";
+    }
+
 }
