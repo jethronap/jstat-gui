@@ -1,9 +1,11 @@
 package gui;
 
 
+import detail.compute.DescriptiveStats;
 import detail.config.JStatGuiGlobalData;
 import detail.datasets.DataSetViewInfoHolder;
 import detail.datasets.IDataSet;
+import detail.tasks.ComputeDescriptiveStatisticsTask;
 import detail.tasks.TaskBase;
 import detail.wrappers.AnalysisFormWrapper;
 import org.springframework.stereotype.Controller;
@@ -22,91 +24,112 @@ import java.util.List;
 @RequestMapping("/analysis-result")
 public class AnalysisResult {
 
+    TaskBase task = null;
+    List<DescriptiveStats> result;
     @GetMapping
-    public String analysisView(@RequestParam("taskName") String taskName, Model model){
+    public String analysisView(@RequestParam("taskName") String taskName, Model model) {
 
         //String taskIdentifier =
 
-        TaskBase task = JStatGuiGlobalData.getTask(taskName);
+        task = JStatGuiGlobalData.getTask(taskName);
 
-        if(task != null){
-            System.out.println("Task with name: "+taskName+" exists");
+        if (task != null) {
+            System.out.println("Task with name: " + taskName + " exists");
+        } else {
+            System.out.println("Task with name: " + taskName + " does not exist");
         }
-        else{
-            System.out.println("Task with name: "+taskName+" does not exist");
+
+        if (result == null) {
+
+            model.addAttribute("taskName", taskName);
+
         }
-
-        model.addAttribute("taskName", taskName);
-
-        /*List<DataSetViewInfoHolder> dataSets = new ArrayList<>();
-
-        for(int i=0; i<dataSetNames.size(); ++i){
-
-            IDataSet dataSet = JStatGuiGlobalData.dataSetContainer.getDataSet(dataSetNames.get(i));
-
-            List<String> cols = new ArrayList<>();
-            cols.add("All");
-
-            List<String> dataSetCols = dataSet.getColumnNames();
-
-            for(int name=0; name<dataSetCols.size(); ++name){
-                cols.add(dataSetCols.get(name));
+        else {
+            for (int i = 0; i < result.size(); i++) {
+                model.addAttribute("mean", result.get(i).mean);
             }
-
-            DataSetViewInfoHolder holder = new DataSetViewInfoHolder();
-            holder.name = dataSet.getName();
-            holder.names = cols;
-
-            dataSets.add(holder);
         }
 
-        model.addAttribute("dataSets", dataSets);*/
         return "analysis_result_descriptive_stats";
     }
 
     @PostMapping
-    public String handleAnalysisResultForm(@RequestParam("taskName") String taskName/*@Valid AnalysisFormWrapper formWrapper, Errors errors*/){
+    public String handleAnalysisResultForm(@RequestParam("taskName") String taskName, AnalysisFormWrapper formWrapper /*Errors errors*/) throws Exception {
 
-        TaskBase task = JStatGuiGlobalData.getTask(taskName);
 
-        /*try {
-            wait(1000);
-        }
-        catch (InterruptedException e){
+        task = JStatGuiGlobalData.getTask(taskName);
 
-        }*/
+        System.out.println(formWrapper.colName);
+        System.out.println(taskName);
 
-        // validate form
-        /*if (errors.hasErrors()) {
-            System.out.println("Form has errors...");
-            return "/analysis";
-        }
+        if (taskName != null) {
 
-        // Try to figure out what sort of
-        // analysis we want to do
-        if(formWrapper.eda != null){
+            System.out.println("we got here.");
+            //System.out.println(task.call());
 
-            this.computeDataSetStatistics(formWrapper);
-        }
-        else if(formWrapper.linear_regression != null){
+            if (task == null) {
+                return "analysis_result_descriptive_stats";
+            }
 
-        }
-        else if(formWrapper.non_linear_regression != null){
+            result =((ComputeDescriptiveStatisticsTask) task).getResult();
+            System.out.println("result size: "+ result.size());
+            return "redirect:/analysis-result?taskName=" + taskName;
+           // model.addAttribute("mean");
+//          model.addAttribute("median");
+//            model.addAttribute("variance");
+        } else if (formWrapper.linear_regression != null) {
 
-        }
-        else if(formWrapper.logistic_regression != null){
+        } else if (formWrapper.non_linear_regression != null) {
 
-        }
-        else if(formWrapper.kmeans_clustering != null){
+        } else if (formWrapper.logistic_regression != null) {
 
-        }
-        else{
+        } else if (formWrapper.kmeans_clustering != null) {
+
+        } else {
 
             // return an error message that no valid action
             // was selected
-        }*/
+        }
 
         // redirect to the analysis page again
-        return "redirect:/analysis-result?taskName="+taskName;
+        return "index";
+    }
+
+    protected void computeDataSetStatistics(AnalysisFormWrapper formWrapper) {
+
+
+        System.out.println("================");
+        System.out.println("computeDataSetStatistics...");
+        System.out.println("================");
+        System.out.println("Filename exploreDataSet: " + formWrapper.eda);
+        System.out.println("Filename exploreDataSet: " + formWrapper.dataSetName);
+        System.out.println("Column Name: " + formWrapper.colName);
+
+        // get the name of the dataset
+        String dataSetName = formWrapper.dataSetName;
+        IDataSet dataSet = JStatGuiGlobalData.dataSetContainer.getDataSet(dataSetName);
+
+        if (formWrapper.colName == "All") {
+
+            List<String> dataSetCols = dataSet.getColumnNames();
+            String[] names = new String[dataSetCols.size()];
+
+            for (int i = 0; i < names.length; ++i) {
+                names[i] = dataSetCols.get(i);
+            }
+
+            // submit it to the pool
+            TaskBase task = new ComputeDescriptiveStatisticsTask("EDA", dataSet, names);
+            JStatGuiGlobalData.workersPool.submit(task);
+            JStatGuiGlobalData.tasks.add(task);
+
+
+        } else {
+
+            // submit it to the pool
+            TaskBase task = new ComputeDescriptiveStatisticsTask("EDA", dataSet, formWrapper.colName);
+            JStatGuiGlobalData.workersPool.submit(task);
+            JStatGuiGlobalData.tasks.add(task);
+        }
     }
 }

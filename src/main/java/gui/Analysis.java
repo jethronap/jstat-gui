@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import tech.tablesaw.columns.Column;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class Analysis {
         if(formWrapper.eda != null){
 
             this.computeDataSetStatistics(formWrapper);
-            return "redirect:/analysis-result?taskName=" + "EDA";
+            return "redirect:/analysis-result?taskName=" + "EDA"+formWrapper.colName;
         }
         else if(formWrapper.linear_regression != null){
 
@@ -111,6 +112,10 @@ public class Analysis {
         String dataSetName = formWrapper.dataSetName;
         IDataSet dataSet = JStatGuiGlobalData.dataSetContainer.getDataSet(dataSetName);
 
+        if (dataSet == null) {
+            System.out.println("dataSet is null");
+        }
+
         if(formWrapper.colName == "All"){
 
             List<String> dataSetCols = dataSet.getColumnNames();
@@ -121,7 +126,7 @@ public class Analysis {
             }
 
             // submit it to the pool
-            TaskBase task = new ComputeDescriptiveStatisticsTask("EDA", dataSet, names);
+            TaskBase task = new ComputeDescriptiveStatisticsTask<Column>("EDA"+"All", dataSet, names);
             JStatGuiGlobalData.workersPool.submit(task);
             JStatGuiGlobalData.tasks.add(task);
 
@@ -129,7 +134,7 @@ public class Analysis {
         else{
 
             // submit it to the pool
-            TaskBase task = new ComputeDescriptiveStatisticsTask("EDA", dataSet, formWrapper.colName);
+            TaskBase task = new ComputeDescriptiveStatisticsTask<Column>("EDA"+formWrapper.colName, dataSet, formWrapper.colName);
             JStatGuiGlobalData.workersPool.submit(task);
             JStatGuiGlobalData.tasks.add(task);
         }
