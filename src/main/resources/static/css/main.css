@@ -15,3 +15,5 @@ span {
   display: inline-block;
   transform: rotate(180deg);
 }
+
+body {background-color: rgb(233, 236, 239);}
