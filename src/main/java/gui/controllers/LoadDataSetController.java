@@ -46,6 +46,6 @@ public class LoadDataSetController {
         JStatGuiGlobalData.workersPool.submit(new LoadDataSetTask(file, JStatGuiGlobalData.dataSetContainer));
 
         // redirect to the index page
-        return "redirect:/";
+        return "redirect:/analysis";
     }
 }
