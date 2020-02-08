@@ -9,6 +9,7 @@
 
 <div class="container">
 
+    <div th:replace="fragments/select_dataset"/>
     <h4 th:text="${taskName}"></h4>
 
     <form method="POST" th:action="@{/analysis-result(taskName=${taskName})}">
