@@ -12,7 +12,7 @@ import java.util.List;
  * Compute the descriptive statistics of the columns from the given
  * data set
  */
-public class ComputeDescriptiveStatisticsTask extends TaskBase {
+public class ComputeDescriptiveStatisticsTask<T> extends TaskBase {
 
     public ComputeDescriptiveStatisticsTask(String name, IDataSet dataSet, String... names){
 
@@ -32,27 +32,29 @@ public class ComputeDescriptiveStatisticsTask extends TaskBase {
 
             DescriptiveStats statistics = new DescriptiveStats();
             statistics.name = name;
-            statistics.compute((NumericSample) this.dataSet.getItem(name));
+            dataSet.getItem(name);
+            statistics.compute(this.dataSet.getItem(name));
             stats.add(statistics);
         }
 
-        // no notify the Messaging that
+        // now notify the Messaging that
         msg = new JStateMessage("Statistics computation for " + dataSet.getName()+" is finished");
         this.setState(State.FINISHED);
 
+        System.out.println("task finished");
         return msg;
     }
 
     /**
      * Return the result of the task
      */
-    List<DescriptiveStats> getResult(){return this.stats;}
+    public List<DescriptiveStats> getResult(){return this.stats;}
 
     /**
      * Return the result. It waits the specified amount of time
      * if the task is not finished
      */
-    List<DescriptiveStats> getResultOrWait(int time){
+    public List<DescriptiveStats> getResultOrWait(int time){
 
         if(!this.finished()){
 
@@ -71,7 +73,7 @@ public class ComputeDescriptiveStatisticsTask extends TaskBase {
     /**
      * Instance that holds the loaded data set
      */
-    private IDataSet dataSet;
+    private IDataSet<T> dataSet;
 
 
     /**
