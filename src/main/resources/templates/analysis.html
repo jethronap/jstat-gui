@@ -10,48 +10,8 @@
     <div class="container">
 
         <h4 class="display-4 text-center">Select An Analysis Type</h4>
-        <!--            <div class="row row-cols-1 row-cols-md-3">-->
 
-        <!--                <div class="col mb-4">-->
-        <!--                    <div class="card">-->
-        <!--                        <img src="..." class="card-img-top" alt="...">-->
-        <!--                        <div class="card-body">-->
-        <!--                            <h5 class="card-title">Exploratory EDAAnalysis</h5>-->
-        <!--                            <p class="card-text">This is where you do descriptive statistics</p>-->
-        <!--                            <a href="#" class="btn btn-primary">EDA</a>-->
-        <!--                        </div>-->
-        <!--                        &lt;!&ndash;                    <input name="eda" type="checkbox" value="exploratory_analysis"/>&ndash;&gt;-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--                <li>-->
-        <!--                    <input name="plotting" type="checkbox" value="plot"/> Plot-->
-        <!--                </li>-->
-        <!--                <li>Modelling-->
-        <!--                    <ul>Regression-->
-        <!--                        <li>-->
-        <!--                            <input name="linear_regression" type="checkbox" value="linear_regression"/> Linear-->
-        <!--                            Regression-->
-        <!--                        </li>-->
-        <!--                        <li>-->
-        <!--                            <input name="non_linear_regression" type="checkbox" value="non_linear_regression"/> Non-->
-        <!--                            Linear Regression-->
-        <!--                        </li>-->
-        <!--                    </ul>-->
-        <!--                    <ul>Classification-->
-        <!--                        <li>-->
-        <!--                            <input name="logistic_regression" type="checkbox" value="logistic_regression"/> Logistic-->
-        <!--                            Regression-->
-        <!--                        </li>-->
-        <!--                    </ul>-->
-        <!--                    <ul>Clustering-->
-        <!--                        <li>-->
-        <!--                            <input name="kmeans_clustering" type="checkbox" value="kmeans"/> KMeans-->
-        <!--                        </li>-->
-        <!--                    </ul>-->
-        <!--                </li>-->
-        <!--            </div>-->
-
-        <!--    These are the cards in row-->
+        <!--    These are the cards in a row-->
         <div class="row">
             <div class="row row-cols-1 row-cols-md-2">
                     <div class="col mb-4">
@@ -61,7 +21,7 @@
                                 <p class="card-text text-right">Here you can see the results of some descriptive
                                     statistics.</p>
                                 <hr class="my-4">
-                                <a th:href="@{/eda_results}" class="btn btn-dark">Do Some EDA</a>
+                                <a th:href="@{/eda_results(taskName=EDA)}" class="btn btn-dark" th:value="EDA">Do Some EDA</a>
                             </div>
                         </div>
                     </div>
@@ -100,12 +60,9 @@
                 </div>
             </div>
         </div>
-        <!--            <p><input type="submit" value="Do EDAAnalysis" class="btn btn-secondary" role="button"></p>-->
-        <!--        </form>-->
 
     </div>
 </div>
-<!--</div>-->
 <!-- /.container -->
 
 <div th:replace="fragments/footer :: footer"/>
