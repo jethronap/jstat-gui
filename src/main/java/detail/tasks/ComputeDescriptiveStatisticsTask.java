@@ -34,7 +34,7 @@ public class ComputeDescriptiveStatisticsTask extends TaskBase {
         for(String name : this.names){
 
             DescriptiveStatistics statistics = new DescriptiveStatistics();
-            statistics.name = name;
+            statistics.setDataSetName( name );
             statistics.compute(this.dataSet.getItem(name));
             stats.add(statistics);
         }
@@ -49,13 +49,13 @@ public class ComputeDescriptiveStatisticsTask extends TaskBase {
     /**
      * Return the result of the task
      */
-    List<DescriptiveStatistics> getResult(){return this.stats;}
+    public List<DescriptiveStatistics> getResult(){return this.stats;}
 
     /**
      * Return the result. It waits the specified amount of time
      * if the task is not finished
      */
-    List<DescriptiveStatistics> getResultOrWait(int time){
+    public List<DescriptiveStatistics> getResultOrWait(int time){
 
         if(!this.finished()){
 

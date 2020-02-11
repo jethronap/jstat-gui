@@ -1,33 +1,47 @@
 package mongodb;
 
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+
+import java.awt.*;
+import java.util.Map;
 
 /**
  * Base class for all MongoDB documents
  */
-public class DocBase {
+public abstract class DocBase implements IDefaultBuildable{
 
 
     /**
      * Return the id of the document
      */
     public String getId() {
-        return Id;
+        return id;
     }
+
+    /**
+     * Return the ObjectId
+     */
+    public ObjectId getObjectId(){return new ObjectId(this.getId());}
 
     /**
      * Set the id of the document
      */
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
+
+    /**
+     * Helper class used for mocking
+     */
+    public abstract boolean satisfiesConditions(Map<String, String> conditions);
 
     /**
      * Id of the document
      */
     @Id
-    private String Id;
+    private String id;
 
 
 }

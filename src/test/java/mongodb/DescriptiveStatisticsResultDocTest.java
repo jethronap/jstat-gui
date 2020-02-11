@@ -1,23 +1,34 @@
 package mongodb;
 
+import detail.compute.EDAResultModel;
+import mongodb.mocks.MongoDBMock;
+import org.bson.types.ObjectId;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.test.context.ContextConfiguration;
+
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+import static org.springframework.data.mongodb.core.query.Query.query;
+//import static org.springframework.data.mongodb.core.query.Criteria.query;
+
 import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes=MongoConfig.class)
-//@EnableMongoRepositories//(basePackageClasses=ComputeResultRepository.class)
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-//@ContextConfiguration//(classes=ComputeResultRepository.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes=MongoDBMock.class)
 public class DescriptiveStatisticsResultDocTest {
 
-    @Autowired
-    MongoTemplate mongoTemplate;
+    @Value("${collections.compute.results}")
+    String compute_results_collection;
 
     /**
      * Test Scenario: A DescriptiveStatisticsResult is ready to be written
@@ -27,9 +38,25 @@ public class DescriptiveStatisticsResultDocTest {
     @Test
     public void testInsertDescriptiveStatisticsResult(){
 
-        DescriptiveStatisticsResultDoc doc = new DescriptiveStatisticsResultDoc();
-        mongoTemplate.save(doc, "ComputeResults");
-        //repository.save(doc);
+        MongoDBMock mongoTemplate = new MongoDBMock();
+
+        System.out.println("Collection results: "+ compute_results_collection);
+        EDAResultModel model = new EDAResultModel();
+        model.name = "TestDataSet";
+        model.variance = 13.0;
+        model.median = 13.0;
+        model.mean = 13.0;
+
+        DescriptiveStatisticsResultDoc doc = new DescriptiveStatisticsResultDoc(model);
+        mongoTemplate.save(doc, compute_results_collection);
+
+        
+        // retrieve the document and delete it
+        DescriptiveStatisticsResultDoc retriveddoc = mongoTemplate.findOne(Query.query(Criteria.where("model.name").is("TestDataSet")),
+                                                                            DescriptiveStatisticsResultDoc.class, compute_results_collection);
+
+        assertNotNull(retriveddoc);
+        assertEquals(retriveddoc.getName(), doc.getName() );
 
     }
 }

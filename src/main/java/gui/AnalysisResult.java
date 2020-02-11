@@ -1,9 +1,11 @@
 package gui;
 
 
+import detail.compute.EDAResultModel;
 import detail.config.JStatGuiGlobalData;
 import detail.datasets.DataSetViewInfoHolder;
 import detail.datasets.IDataSet;
+import detail.tasks.ComputeDescriptiveStatisticsTask;
 import detail.tasks.TaskBase;
 import detail.wrappers.AnalysisFormWrapper;
 import org.springframework.stereotype.Controller;
@@ -16,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/analysis-result")
@@ -38,29 +42,12 @@ public class AnalysisResult {
 
         model.addAttribute("taskName", taskName);
 
-        /*List<DataSetViewInfoHolder> dataSets = new ArrayList<>();
-
-        for(int i=0; i<dataSetNames.size(); ++i){
-
-            IDataSet dataSet = JStatGuiGlobalData.dataSetContainer.getDataSet(dataSetNames.get(i));
-
-            List<String> cols = new ArrayList<>();
-            cols.add("All");
-
-            List<String> dataSetCols = dataSet.getColumnNames();
-
-            for(int name=0; name<dataSetCols.size(); ++name){
-                cols.add(dataSetCols.get(name));
-            }
-
-            DataSetViewInfoHolder holder = new DataSetViewInfoHolder();
-            holder.name = dataSet.getName();
-            holder.names = cols;
-
-            dataSets.add(holder);
+        if(task != null){
+            EDAResultModel result = getResults(task);
+            model.addAttribute("results", result);
         }
 
-        model.addAttribute("dataSets", dataSets);*/
+
         return "analysis_result_descriptive_stats";
     }
 
@@ -69,44 +56,26 @@ public class AnalysisResult {
 
         TaskBase task = JStatGuiGlobalData.getTask(taskName);
 
-        /*try {
-            wait(1000);
-        }
-        catch (InterruptedException e){
 
-        }*/
-
-        // validate form
-        /*if (errors.hasErrors()) {
-            System.out.println("Form has errors...");
-            return "/analysis";
-        }
-
-        // Try to figure out what sort of
-        // analysis we want to do
-        if(formWrapper.eda != null){
-
-            this.computeDataSetStatistics(formWrapper);
-        }
-        else if(formWrapper.linear_regression != null){
-
-        }
-        else if(formWrapper.non_linear_regression != null){
-
-        }
-        else if(formWrapper.logistic_regression != null){
-
-        }
-        else if(formWrapper.kmeans_clustering != null){
-
-        }
-        else{
-
-            // return an error message that no valid action
-            // was selected
-        }*/
 
         // redirect to the analysis page again
         return "redirect:/analysis-result?taskName="+taskName;
+    }
+
+    private EDAResultModel getResults(TaskBase task){
+
+        Map<String, String > result = new HashMap<>();
+
+        /// this should actually be returned by the task
+        ComputeDescriptiveStatisticsTask compTask = (ComputeDescriptiveStatisticsTask) task;
+
+        if(task.finished()){
+
+            /*result.put("Mean", Double.toHexString(13.0));
+            result.put("Variance", Double.toHexString(13.0));
+            result.put("Median", Double.toHexString(13.0));*/
+        }
+
+        return (EDAResultModel) compTask.getResult().get(0).getResultModel();
     }
 }
