@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class MongoDBMock {
 
-    //@Value("${collections.compute.results}")
+
     String compute_results_collection = "compute_results_coll";
 
 

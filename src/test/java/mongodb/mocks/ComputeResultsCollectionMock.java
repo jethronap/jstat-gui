@@ -13,7 +13,7 @@ public class ComputeResultsCollectionMock implements IMongoDBCollectionMock {
 
 
     public ComputeResultsCollectionMock(){
-        data_ = new ArrayList<Object>();
+        data_ = new ArrayList<>();
     }
 
 

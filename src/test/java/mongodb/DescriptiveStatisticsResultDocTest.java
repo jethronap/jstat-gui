@@ -41,10 +41,11 @@ public class DescriptiveStatisticsResultDocTest {
 
         // populate a document from the model
         DescriptiveStatisticsResultDoc doc = new DescriptiveStatisticsResultDoc(model);
+
+        // save it in the mocked db
         mongoTemplate.save(doc, compute_results_collection);
 
-        
-        // retrieve the document and delete it
+        // retrieve the document
         DescriptiveStatisticsResultDoc retriveddoc = mongoTemplate.findOne(Query.query(Criteria.where("model.name").is("TestDataSet")),
                                                                             DescriptiveStatisticsResultDoc.class, compute_results_collection);
 

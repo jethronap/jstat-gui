@@ -41,7 +41,6 @@ public class DescriptiveStatistics  {
      * model
      */
     public EDAResultModel getResultModel(){
-
         return resultModel;
     }
 

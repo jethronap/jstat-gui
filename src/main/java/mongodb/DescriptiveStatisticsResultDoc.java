@@ -69,14 +69,23 @@ public class DescriptiveStatisticsResultDoc extends ComputeResultDocBase {
         return this.model.name;
     }
 
+    /**
+      * Returns the mean
+     */
     public double getMean(){
         return this.model.mean;
     }
 
+    /**
+     * Returns the median
+     */
     public double getMedian(){
         return this.model.median;
     }
 
+    /**
+     * Returns the variance
+     */
     public double getVariance(){
         return this.model.variance;
     }
@@ -86,7 +95,46 @@ public class DescriptiveStatisticsResultDoc extends ComputeResultDocBase {
      */
     @Override
     public boolean satisfiesConditions(Map<String, String> conditions){
-        return true;
+        boolean satisfies = true;
+
+        for (Map.Entry<String,String> entry : conditions.entrySet()) {
+
+            String value = entry.getValue();
+            String key = entry.getKey();
+
+            if(key.equals("description")){
+                satisfies = value.equals(this.description);
+            }
+            else{
+
+                String[] modelKeys = key.split("[.]");
+                key = modelKeys[1];
+
+                if(key.equals("mean")){
+
+                    double mean = Double.valueOf(value);
+                    satisfies = (mean == model.mean);
+                }
+                else if(key.equals("variance")){
+                    double variance = Double.valueOf(value);
+                    satisfies = (variance == model.variance);
+                }
+                else if(key.equals("median")){
+                    double median = Double.valueOf(value);
+                    satisfies = (median == model.median);
+                }
+                else if(key.equals("name")){
+                    satisfies = model.name.equals(value);
+                }
+            }
+
+            if(!satisfies){
+                break;
+            }
+
+        }
+
+        return satisfies;
     }
 
     private String description;
