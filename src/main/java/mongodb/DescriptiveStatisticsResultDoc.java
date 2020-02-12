@@ -1,6 +1,8 @@
 package mongodb;
 
-import detail.compute.EDAResultModel;
+import detail.models.EDAResultModel;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Map;
@@ -40,11 +42,29 @@ public class DescriptiveStatisticsResultDoc extends ComputeResultDocBase {
         this.description = description;
     }
 
-    @Override
-    public IDefaultBuildable build(){
-        return new DescriptiveStatisticsResultDoc();
+    /**
+     * Save the document in the provided MongoDB instance
+     */
+    public void save(MongoTemplate db){
+
+        if(db == null){
+            throw new IllegalArgumentException("MongoDB instance given is null");
+        }
+
+        db.save(this, this.collection_name);
     }
 
+    /**
+     * Returns the collection name the document belongs to
+     */
+    public String getCollectionName(){
+        return collection_name;
+    }
+
+
+    /**
+     * Returns the name of the model
+     */
     public String getName(){
         return this.model.name;
     }
@@ -71,4 +91,7 @@ public class DescriptiveStatisticsResultDoc extends ComputeResultDocBase {
 
     private String description;
     private EDAResultModel model;
+
+    @Value("${compute_results_coll}")
+    String collection_name;
 }

@@ -1,25 +1,18 @@
 package gui;
 
 
-import detail.compute.EDAResultModel;
+import detail.models.EDAResultModel;
 import detail.config.JStatGuiGlobalData;
-import detail.datasets.DataSetViewInfoHolder;
-import detail.datasets.IDataSet;
 import detail.tasks.ComputeDescriptiveStatisticsTask;
 import detail.tasks.TaskBase;
-import detail.wrappers.AnalysisFormWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller

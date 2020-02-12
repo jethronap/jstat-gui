@@ -1,6 +1,8 @@
 package detail.compute;
 
-public class DescriptiveStatistics implements IComputeModel {
+import detail.models.EDAResultModel;
+
+public class DescriptiveStatistics  {
 
 
     /**
@@ -10,6 +12,9 @@ public class DescriptiveStatistics implements IComputeModel {
         this.resultModel = new EDAResultModel();
     }
 
+    /**
+     * Compute the statistics of the given sample
+     */
     public <SampleTp> void  compute(SampleTp sample){
 
        resultModel.mean = 13.0;
@@ -24,22 +29,18 @@ public class DescriptiveStatistics implements IComputeModel {
         this.resultModel.name = name;
     }
 
-
     /**
      * Get the type of the computation model
      */
-    @Override
     public ComputationModelType getComputationModelType(){
         return ComputationModelType.EDA;
     }
-
 
     /**
      * Returns the model that represents the result of the
      * model
      */
-    @Override
-    public IResultModel getResultModel(){
+    public EDAResultModel getResultModel(){
 
         return resultModel;
     }
