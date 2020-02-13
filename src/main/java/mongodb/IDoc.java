@@ -9,54 +9,47 @@ import java.awt.*;
 import java.util.Map;
 
 /**
- * Base class for all MongoDB documents
+ * General interface for all MongoDB documents
  */
-public abstract class DocBase {
+public interface IDoc {
 
 
     /**
      * Return the id of the document
      */
-    public String getId() {
-        return id;
-    }
+    String getId();
 
     /**
      * Return the ObjectId
      */
-    public ObjectId getObjectId(){return new ObjectId(this.getId());}
+    ObjectId getObjectId();
 
     /**
      * Set the id of the document
      */
-    public void setId(String id) {
-        this.id = id;
-    }
-
+    void setId(String id);
 
     /**
      * Save the document in the provided MongoDB instance
      */
-    public abstract void save(MongoTemplate db);
+    void save(MongoTemplate db);
+
+    /**
+     * Update the document in the provided MongoDB instance
+     */
+    void update(MongoTemplate db);
 
     /**
      * Returns the collection name the document belongs to
      */
-    public abstract String getCollectionName();
+    String getCollectionName();
 
     /**
      * Helper class used for mocking. Returns true if the
      * document satisfies all the conditions described by the Map
      * instance.
      */
-    public abstract boolean satisfiesConditions(Map<String, String> conditions);
-
-
-    /**
-     * Id of the document
-     */
-    @Id
-    private String id;
+    boolean satisfiesConditions(Map<String, String> conditions);
 
 
 }

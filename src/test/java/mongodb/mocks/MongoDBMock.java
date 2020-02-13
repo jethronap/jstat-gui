@@ -1,7 +1,6 @@
 package mongodb.mocks;
 
-import mongodb.DocBase;
-import org.springframework.beans.factory.annotation.Value;
+import mongodb.IDoc;
 import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.HashMap;
@@ -22,7 +21,7 @@ public class MongoDBMock {
         db_.put(compute_results_collection, MongoDBCollectionMockFactory.build(compute_results_collection));
     }
 
-    public <T extends DocBase> T findOne(Query criteria, Class<T> objClass, String collection){
+    public <T extends IDoc> T findOne(Query criteria, Class<T> objClass, String collection){
 
         if(collection == null){
             throw new IllegalArgumentException("Collection name not specified");
@@ -31,7 +30,7 @@ public class MongoDBMock {
         return db_.get(collection).findOne(criteria, objClass);
     }
 
-    public <T extends DocBase> void save(T object, String collection){
+    public <T extends IDoc> void save(T object, String collection){
         db_.get(collection).add(object);
     }
 

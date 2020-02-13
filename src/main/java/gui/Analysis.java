@@ -31,7 +31,7 @@ public class Analysis {
     public String analysisView(Model model){
 
         // in order to do an analysis we need the list of the loaded data sets
-        List<String> dataSetNames = JStatGuiGlobalData.dataSetContainer.dataSetNames();
+        /*List<String> dataSetNames = JStatGuiGlobalData.dataSetContainer.dataSetNames();
 
         if(dataSetNames.size() == 0){
             dataSetNames.add("No datasets loaded");
@@ -59,7 +59,7 @@ public class Analysis {
             dataSets.add(holder);
         }
 
-        model.addAttribute("dataSets", dataSets);
+        model.addAttribute("dataSets", dataSets);*/
         return "analysis_index";
     }
 
@@ -76,7 +76,7 @@ public class Analysis {
         // analysis we want to do
         if(formWrapper.eda != null){
 
-            this.computeDataSetStatistics(formWrapper);
+            return "redirect:/analysis-eda";
         }
         else if(formWrapper.linear_regression != null){
 
@@ -90,51 +90,11 @@ public class Analysis {
         else if(formWrapper.kmeans_clustering != null){
 
         }
-        else{
-
-            // return an error message that no valid action
-            // was selected
-        }
 
         // redirect to the analysis page again
-        return "redirect:/analysis-result?taskName=" + "Mean";
+        // we have some sort of an error
+        return "/analysis";
     }
 
-    protected void computeDataSetStatistics(AnalysisFormWrapper formWrapper){
 
-
-        System.out.println("================");
-        System.out.println("computeDataSetStatistics...");
-        System.out.println("================");
-        System.out.println("Filename exploreDataSet: "+formWrapper.eda);
-        System.out.println("Filename exploreDataSet: "+formWrapper.dataSetName);
-        System.out.println("Column Name: " + formWrapper.colName);
-
-        // get the name of the dataset
-        String dataSetName = formWrapper.dataSetName;
-        IDataSet dataSet = JStatGuiGlobalData.dataSetContainer.getDataSet(dataSetName);
-
-        if(formWrapper.colName == "All"){
-
-            List<String> dataSetCols = dataSet.getColumnNames();
-            String[] names = new String[dataSetCols.size()];
-
-            for(int i=0; i<names.length; ++i){
-                names[i] = dataSetCols.get(i);
-            }
-
-            // submit it to the pool
-            TaskBase task = new ComputeDescriptiveStatisticsTask("Mean", dataSet, names);
-            JStatGuiGlobalData.workersPool.submit(task);
-            JStatGuiGlobalData.tasks.add(task);
-
-        }
-        else{
-
-            // submit it to the pool
-            TaskBase task = new ComputeDescriptiveStatisticsTask("Mean", dataSet, formWrapper.colName);
-            JStatGuiGlobalData.workersPool.submit(task);
-            JStatGuiGlobalData.tasks.add(task);
-        }
-    }
 }

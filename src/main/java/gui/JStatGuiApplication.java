@@ -39,7 +39,7 @@ public class JStatGuiApplication {
         }
 
         // Output useful msgs
-        System.out.println("Number of threads used: " + JStatGuiGlobalData.workersPool.getActiveCount());
+        //System.out.println("Number of threads used: " + JStatGuiGlobalData.workersPool.getActiveCount());
 
         SpringApplication.run(JStatGuiApplication.class, args);
     }

@@ -21,6 +21,7 @@ public class TaskUtils {
         for(int t=0; t<tasks.size(); ++t){
 
             if(tasks.get(t).getState() != TaskBase.State.FINISHED){
+                //System.out.println("Task is not finished");
                 result = false;
                 break;
             }

@@ -27,11 +27,6 @@ public class MongoConfig {
 
     @Bean
     public MongoClient mongoClient() {
-
-        if(MONGO_DB_URL.equals("localhost")){
-            return MongoClients.create();
-        }
-
         return MongoClients.create(MONGO_DB_URL);
     }
 

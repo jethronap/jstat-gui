@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form method="POST" th:action="@{/analysis-result(taskName=${taskName})}">
+<form method="POST" th:action="@{/analysis-result/?(controlTaskId=${controlTaskId})}">
     <button>Get Result</button>
 </form>
 

@@ -1,5 +1,6 @@
 package mongodb;
 
+import detail.compute.ComputationModelType;
 import detail.models.EDAResultModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -10,7 +11,7 @@ import java.util.Map;
 /**
  * DescriptiveStatisticsResultDoc
  */
-@Document(collection="compute-results")
+@Document(collection="compute_results_coll")
 public class DescriptiveStatisticsResultDoc extends ComputeResultDocBase {
 
     /**
@@ -20,6 +21,8 @@ public class DescriptiveStatisticsResultDoc extends ComputeResultDocBase {
 
         this.model = null;
         this.description = "No Description";
+        this.setComputationModelType(ComputationModelType.EDA);
+        this.collection_name = "compute_results_coll";
     }
 
     /**
@@ -30,6 +33,8 @@ public class DescriptiveStatisticsResultDoc extends ComputeResultDocBase {
 
         this.model = model;
         this.description = "No Description";
+        this.setComputationModelType(ComputationModelType.EDA);
+        this.collection_name = "compute_results_coll";
     }
 
     /**
@@ -40,6 +45,8 @@ public class DescriptiveStatisticsResultDoc extends ComputeResultDocBase {
 
         this.model = model;
         this.description = description;
+        this.setComputationModelType(ComputationModelType.EDA);
+        this.collection_name = "compute_results_coll";
     }
 
     /**
@@ -52,6 +59,11 @@ public class DescriptiveStatisticsResultDoc extends ComputeResultDocBase {
         }
 
         db.save(this, this.collection_name);
+    }
+
+    @Override
+    public void update(MongoTemplate db){
+
     }
 
     /**
@@ -140,6 +152,6 @@ public class DescriptiveStatisticsResultDoc extends ComputeResultDocBase {
     private String description;
     private EDAResultModel model;
 
-    @Value("${compute_results_coll}")
+
     String collection_name;
 }

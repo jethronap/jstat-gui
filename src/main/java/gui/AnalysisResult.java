@@ -5,6 +5,10 @@ import detail.models.EDAResultModel;
 import detail.config.JStatGuiGlobalData;
 import detail.tasks.ComputeDescriptiveStatisticsTask;
 import detail.tasks.TaskBase;
+import mongodb.ComputeTasksControllerDoc;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,40 +24,54 @@ import java.util.Map;
 @RequestMapping("/analysis-result")
 public class AnalysisResult {
 
+    @Autowired
+    MongoTemplate mongoTemplate;
+
+    @Value("${collections.control.tasks}")
+    String controlColection;
+
     @GetMapping
-    public String analysisView(@RequestParam("taskName") String taskName, Model model){
+    public String analysisView(@RequestParam("controlTaskId") String controlTaskId, Model model){
 
-        //String taskIdentifier =
 
-        TaskBase task = JStatGuiGlobalData.getTask(taskName);
+        // find the document that corresponds
+        // to this control Task
+        ComputeTasksControllerDoc doc = mongoTemplate.findById(controlTaskId, ComputeTasksControllerDoc.class, controlColection);
 
-        if(task != null){
-            System.out.println("Task with name: "+taskName+" exists");
-        }
-        else{
-            System.out.println("Task with name: "+taskName+" does not exist");
+        if(doc == null){
+            throw new IllegalArgumentException("No control task for id: "+controlTaskId);
         }
 
-        model.addAttribute("taskName", taskName);
-
-        if(task != null){
-            EDAResultModel result = getResults(task);
-            model.addAttribute("results", result);
+        // if we haven't finished return
+        if(!doc.isFinished()){
+            model.addAttribute("controlTaskId", controlTaskId);
+            return "analysis_result_descriptive_stats";
         }
+        /*else{
+            model.addAttribute("controlTaskId", controlTaskId );
+            return "analysis_result_descriptive_stats";
+        }*/
 
 
+        model.addAttribute("controlTaskId", controlTaskId );
         return "analysis_result_descriptive_stats";
     }
 
     @PostMapping
-    public String handleAnalysisResultForm(@RequestParam("taskName") String taskName/*@Valid AnalysisFormWrapper formWrapper, Errors errors*/){
+    public String handleAnalysisResultForm(@RequestParam("controlTaskId") String controlTaskId){
 
-        TaskBase task = JStatGuiGlobalData.getTask(taskName);
+        //TaskBase task = JStatGuiGlobalData.getTask(taskName);
 
+        // find the document that corresponds
+        // to this control Task
+        ComputeTasksControllerDoc doc = mongoTemplate.findById(controlTaskId, ComputeTasksControllerDoc.class, controlColection);
 
+        if(doc == null){
+            throw new IllegalArgumentException("No control task for id: "+controlTaskId);
+        }
 
         // redirect to the analysis page again
-        return "redirect:/analysis-result?taskName="+taskName;
+        return "redirect:/analysis-result/?controlTaskId="+controlTaskId;
     }
 
     private EDAResultModel getResults(TaskBase task){

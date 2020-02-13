@@ -1,6 +1,6 @@
 package mongodb.mocks;
 
-import mongodb.DocBase;
+import mongodb.IDoc;
 import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class ComputeResultsCollectionMock implements IMongoDBCollectionMock {
     }
 
 
-    public <T extends DocBase> void add(T object){
+    public <T extends IDoc> void add(T object){
 
         if(object == null){
             throw new IllegalArgumentException("Cannot save null object");
@@ -27,7 +27,7 @@ public class ComputeResultsCollectionMock implements IMongoDBCollectionMock {
         data_.add(object);
     }
 
-    public <T extends DocBase> T findOne(Query query , Class<T> objClass){
+    public <T extends IDoc> T findOne(Query query , Class<T> objClass){
 
 
         String val = query.toString();
