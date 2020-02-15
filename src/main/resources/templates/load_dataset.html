@@ -11,7 +11,7 @@
 
     <div class="container">
 
-        <form method="POST" th:action="@{/load-dataset}" th:object="${fileName}">
+        <form method="POST" th:action="@{/load_dataset}" th:object="${fileName}">
 
             <div th:if="${#fields.hasErrors()}">
             <span class="validationError">

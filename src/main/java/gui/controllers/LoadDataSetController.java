@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.io.File;
 
 @Controller
-@RequestMapping("/load-dataset")
+@RequestMapping("load_dataset")
 public class LoadDataSetController {
 
     @GetMapping
