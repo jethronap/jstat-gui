@@ -8,18 +8,14 @@
 <div th:replace="fragments/header :: header"/>
 
 <div class="container">
-    <form method="POST" th:action="@{/eda_results(taskName=EDA)}">
+    <form method="POST" th:action="@{/eda_view}" target="_blank">
         <div th:replace="fragments/select_dataset"/>
-        <h4 class="display-4" th:text="${taskName}"></h4>
-
         <p>
             <button th:value="eda" type="submit" th:name="action" class="btn btn-secondary">Get Results</button>
         </p>
 
     </form>
 
-    <div th:text="${mean}">Mean:</div>
-    <!--    th:text="${mean}"-->
 </div>
 <!-- /.container -->
 
