@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/analysis")
-public class Analysis {
+@RequestMapping("/EDAanalysis")
+public class EDAAnalysis {
 
 
     @GetMapping

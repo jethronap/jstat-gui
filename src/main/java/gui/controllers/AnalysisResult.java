@@ -50,7 +50,7 @@ public class AnalysisResult {
             }
         }
 
-        return "analysis_result_descriptive_stats";
+        return "eda_results";
     }
 
     @PostMapping
