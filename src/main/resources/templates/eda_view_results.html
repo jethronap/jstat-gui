@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+<!--    <form method="POST" th:action="@{/eda_results(taskName=EDA)}">-->
+<!--        <div th:replace="fragments/select_dataset"/>-->
+<!--        <h4 class="display-4" th:text="${taskName}"></h4>-->
+
+<!--        <p>-->
+<!--            <button th:value="eda" type="submit" th:name="action" class="btn btn-secondary">Get Results</button>-->
+<!--        </p>-->
+
+<!--    </form>-->
+
+    <h4 th:text="${controlTaskId}"></h4>
+    <!--    th:text="${mean}"-->
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
