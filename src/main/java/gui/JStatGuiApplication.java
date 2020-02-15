@@ -2,6 +2,7 @@ package gui;
 
 import detail.config.JStatGuiGlobalData;
 import detail.config.JStatInitialize;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +20,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableAsync
 public class JStatGuiApplication {
 
+
     @Bean("threadPoolTaskExecutor")
     public TaskExecutor getAsyncExecutor() {
 
@@ -35,6 +37,9 @@ public class JStatGuiApplication {
         if(JStatGuiGlobalData.workersPool == null){
             throw new NullPointerException("Could not create worker pool");
         }
+
+        // Output useful msgs
+        //System.out.println("Number of threads used: " + JStatGuiGlobalData.workersPool.getActiveCount());
 
         SpringApplication.run(JStatGuiApplication.class, args);
     }

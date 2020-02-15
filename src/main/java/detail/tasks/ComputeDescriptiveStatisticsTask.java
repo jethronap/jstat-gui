@@ -31,31 +31,40 @@ public class ComputeDescriptiveStatisticsTask extends TaskBase {
         this.setState(State.STARTED);
 
         stats = new ArrayList<>();
-        for(String name : this.names){
+        try {
+            for (String name : this.names) {
 
-            DescriptiveStatistics statistics = new DescriptiveStatistics();
-            statistics.name = name;
-            statistics.compute(this.dataSet.getItem(name));
-            stats.add(statistics);
+                System.out.println("Compute statistics for: " + name);
+                DescriptiveStatistics statistics = new DescriptiveStatistics();
+                statistics.setDataSetName(this.dataSet.getName());
+                statistics.compute(this.dataSet.getItem(name));
+                stats.add(statistics);
+            }
         }
+        catch(Exception e){
+            System.out.print("An exception occured whilst computing");
+            this.setState(State.FINISHED);
+            throw e;
+        }
+
 
         // no notify the Messaging that
         msg = new JStateMessage("Statistics computation for " + dataSet.getName()+" is finished");
         this.setState(State.FINISHED);
-
+        System.out.println("Task Finished");
         return msg;
     }
 
     /**
      * Return the result of the task
      */
-    List<DescriptiveStatistics> getResult(){return this.stats;}
+    public List<DescriptiveStatistics> getResult(){return this.stats;}
 
     /**
      * Return the result. It waits the specified amount of time
      * if the task is not finished
      */
-    List<DescriptiveStatistics> getResultOrWait(int time){
+    public List<DescriptiveStatistics> getResultOrWait(int time){
 
         if(!this.finished()){
 
