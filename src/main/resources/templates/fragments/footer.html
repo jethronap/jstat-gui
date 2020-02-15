@@ -2,21 +2,25 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
+    <div th:fragment="header-css">
+        <!-- this is footer-css -->
+        <link rel="stylesheet"
+              th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}"/>
+
+        <link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+    </div>
 </head>
 <body>
 <div th:fragment="footer">
 
-    <div class="container">
+    <nav class="navbar fixed-bottom navbar-dark bg-dark">
 
-        <footer>
-            <!-- this is footer -->
-<!--            AllCopiesAreRight 2019 Jstat.-->
-            <p th:text="'CopyLeft Jstat - ' + ${#dates.format(#dates.createNow(), 'MMM yyyy')}"></p>
-            <script type="text/javascript"
-                    src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-        </footer>
-    </div>
+        <!-- this is the footer -->
+        <span>&copy;</span>
+        <p th:text="'CopyLeft Jstat - ' + ${#dates.format(#dates.createNow(), 'MMM yyyy')}"></p>
+        <script type="text/javascript"
+                src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </nav>
 
 </div>
 </body>

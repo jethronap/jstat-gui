@@ -3,9 +3,9 @@ package detail.wrappers;
 public class StatisticsWrapper {
 
     String varName;
-    double mean;
-    double variance;
-    double max;
-    double min;
-    double median;
+    public double mean;
+    public double variance;
+    public double max;
+    public double min;
+    public double median;
 }

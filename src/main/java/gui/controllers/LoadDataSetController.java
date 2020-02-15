@@ -1,7 +1,7 @@
-package gui;
+package gui.controllers;
 
 import detail.wrappers.FileWrapper;
-import detail.tasks.LoadDatatSetTask;
+import detail.tasks.LoadDataSetTask;
 import detail.config.JStatGuiGlobalData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +14,8 @@ import javax.validation.Valid;
 import java.io.File;
 
 @Controller
-@RequestMapping("/load-dataset")
-public class LoadDataSet {
+@RequestMapping("load_dataset")
+public class LoadDataSetController {
 
     @GetMapping
     public String loadDataSet(Model model){
@@ -30,22 +30,16 @@ public class LoadDataSet {
         // validate form
         if (errors.hasErrors()) {
             System.out.println("Form has errors...");
-            return "/load-dataset";
+            return "load_dataset";
         }
-
-        // these should be logged better...
-        /*System.out.println("================");
-        System.out.println("handleDataSet...");
-        System.out.println("================");
-        System.out.println("Filename selected: "+fileName.fileName);*/
 
         // now properly from the file
         File file = new File("src/main/resources/datasets/" + fileName.fileName);
 
         // submit it to the pool
-        JStatGuiGlobalData.workersPool.submit(new LoadDatatSetTask(file, JStatGuiGlobalData.dataSetContainer));
+        JStatGuiGlobalData.workersPool.submit(new LoadDataSetTask(file, JStatGuiGlobalData.dataSetContainer));
 
         // redirect to the index page
-        return "redirect:/";
+        return "redirect:/analysis";
     }
 }

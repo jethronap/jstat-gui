@@ -2,11 +2,9 @@ package detail.config;
 
 import detail.datasets.IDataSetContainer;
 
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.util.List;
+
 
 public class JStatGuiGlobalData {
 
@@ -25,10 +23,12 @@ public class JStatGuiGlobalData {
      */
     public static  String control_tasks_collection = "control_tasks_coll";
 
+
     /**
      * Collection name that holds the computed result
      */
     public static String compute_results_collection = "compute_results_coll";
+
 
 
 

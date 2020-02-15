@@ -8,15 +8,15 @@ import detail.datasets.TableDataSet;
 import java.io.File;
 import java.util.concurrent.Callable;
 
-public class LoadDatatSetTask implements Callable<JStateMessage> {
+public class LoadDataSetTask implements Callable<JStateMessage> {
 
-    public LoadDatatSetTask(String fileName, IDataSetContainer container){
+    public LoadDataSetTask(String fileName, IDataSetContainer container){
 
         this.file = new File(fileName);
         this.container = container;
     }
 
-    public LoadDatatSetTask(File file, IDataSetContainer container){
+    public LoadDataSetTask(File file, IDataSetContainer container){
         this.file = file;
         this.container = container;
     }

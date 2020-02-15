@@ -1,4 +1,4 @@
-package gui;
+package gui.controllers;
 
 import detail.config.JStatGuiGlobalData;
 import org.springframework.stereotype.Controller;
@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 /**
- * Quit the JStat-GUI
+ * QuitController the JStat-GUI
  * It shutdowns various utilities that have been started by the application
  */
 @Controller
 @RequestMapping("/quit")
-public class Quit {
+public class QuitController {
 
     @GetMapping
     public String quitView(){

@@ -3,19 +3,15 @@ package detail.tasks;
 import detail.JStateMessage;
 import detail.compute.DescriptiveStatistics;
 import detail.datasets.IDataSet;
-import detail.datasets.IDataSetContainer;
-import detail.datasets.TableDataSet;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 /**
  * Compute the descriptive statistics of the columns from the given
  * data set
  */
-public class ComputeDescriptiveStatisticsTask extends TaskBase {
+public class ComputeDescriptiveStatisticsTask<T> extends TaskBase {
 
     public ComputeDescriptiveStatisticsTask(String name, IDataSet dataSet, String... names){
 
@@ -31,6 +27,7 @@ public class ComputeDescriptiveStatisticsTask extends TaskBase {
         this.setState(State.STARTED);
 
         stats = new ArrayList<>();
+
         try {
             for (String name : this.names) {
 
@@ -52,19 +49,24 @@ public class ComputeDescriptiveStatisticsTask extends TaskBase {
         msg = new JStateMessage("Statistics computation for " + dataSet.getName()+" is finished");
         this.setState(State.FINISHED);
         System.out.println("Task Finished");
+
         return msg;
     }
 
     /**
      * Return the result of the task
      */
+
     public List<DescriptiveStatistics> getResult(){return this.stats;}
+
 
     /**
      * Return the result. It waits the specified amount of time
      * if the task is not finished
      */
+
     public List<DescriptiveStatistics> getResultOrWait(int time){
+
 
         if(!this.finished()){
 
@@ -83,7 +85,7 @@ public class ComputeDescriptiveStatisticsTask extends TaskBase {
     /**
      * Instance that holds the loaded data set
      */
-    private IDataSet dataSet;
+    private IDataSet<T> dataSet;
 
 
     /**

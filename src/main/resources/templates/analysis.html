@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+<div class="jumbotron">
+    <div class="container">
+
+        <h4 class="display-4 text-center">Select An Analysis Type</h4>
+
+        <!--    These are the cards in a row-->
+        <div class="row">
+            <div class="row row-cols-1 row-cols-md-2">
+                    <div class="col mb-4">
+                        <div class="card text-white bg-dark mb-3">
+                            <div class="card-header text-center">Exploratory Analysis</div>
+                            <div class="card-body">
+                                <p class="card-text text-right">Here you can see the results of some descriptive
+                                    statistics.</p>
+                                <hr class="my-4">
+                                <a th:href="@{/eda_view(taskName=EDA)}" class="btn btn-dark" th:value="EDA">Do Some EDA</a>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col mb-4">
+                    <div class="card text-white bg-dark mb-3">
+                        <div class="card-header text-center">Plotting</div>
+                        <div class="card-body">
+                            <p class="card-text text-right">This is were you can do some basic plotting.</p>
+                            <hr class="my-4">
+                            <a href="#" class="btn btn-dark">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card text-white bg-dark mb-3">
+                        <div class="card-header text-center">Modelling</div>
+                        <div class="card-body">
+                            <p class="card-text text-right">Here you'll find regression, classification and clustering
+                                methods.</p>
+                            <hr class="my-4">
+                            <a href="#" class="btn btn-dark">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card text-white bg-dark mb-3">
+                        <div class="card-header text-center">Header</div>
+                        <div class="card-body">
+                            <p class="card-text text-right">This is a longer card with supporting text below as a
+                                natural
+                                lead-in to additional content. This content is a little bit longer.</p>
+                            <hr class="my-4">
+                            <a href="#" class="btn btn-dark">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

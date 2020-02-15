@@ -39,7 +39,7 @@ public abstract class TaskBase implements Callable<JStateMessage> {
     /**
      * Reschedule the task
      */
-    public void rescedule(){
+    public void reschedule(){
         this.setState(State.PENDING);
     }
 
