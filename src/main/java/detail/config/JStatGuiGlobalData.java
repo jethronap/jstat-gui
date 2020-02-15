@@ -2,10 +2,9 @@ package detail.config;
 
 import detail.datasets.IDataSetContainer;
 
-import detail.tasks.TaskBase;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.util.List;
+
 
 public class JStatGuiGlobalData {
 
@@ -14,41 +13,23 @@ public class JStatGuiGlobalData {
      */
     public static IDataSetContainer dataSetContainer;
 
-
     /**
      * A set of worker pools used around
      */
     public static ThreadPoolTaskExecutor workersPool;
 
     /**
-     * Tasks submitted for computation
+     * Collection name that control results are stored
      */
-    public static List<TaskBase> tasks;
+    public static  String control_tasks_collection = "control_tasks_coll";
 
-    public static boolean hasTask(String name){
-        boolean found = false;
 
-        for(int i=0; i<tasks.size(); ++i ){
-            if(tasks.get(i).getTaskName().equals(name)){
-                found = true;
-                break;
-            }
-        }
+    /**
+     * Collection name that holds the computed result
+     */
+    public static String compute_results_collection = "compute_results_coll";
 
-        return found;
-    }
 
-    public static TaskBase getTask(String name){
-        boolean found = false;
-        System.out.println("looking for task name:"+ name);
-        for(int i=0; i<tasks.size(); ++i ){
-            System.out.println(tasks.get(i).getTaskName());
-            if(tasks.get(i).getTaskName().equals(name)){
-                return tasks.get(i);
-            }
-        }
 
-        return null;
-    }
 
 }

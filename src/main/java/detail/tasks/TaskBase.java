@@ -1,8 +1,8 @@
 package detail.tasks;
 
 import detail.JStateMessage;
-
 import java.util.concurrent.Callable;
+import org.springframework.data.annotation.Id;
 
 public abstract class TaskBase implements Callable<JStateMessage> {
 
@@ -61,6 +61,20 @@ public abstract class TaskBase implements Callable<JStateMessage> {
     }
 
     /**
+     * Return the DB related id of the task
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Set the DB related id of the task
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
      * Constructor
      */
     protected TaskBase(String name){
@@ -82,4 +96,10 @@ public abstract class TaskBase implements Callable<JStateMessage> {
      * Set the task name
      */
     String name;
+
+    /**
+     * Id of the task
+     */
+    @Id
+    String id;
 }

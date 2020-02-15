@@ -28,7 +28,7 @@ public class EDAAnalysis {
     public String analysisView(Model model){
 
         // in order to do an analysis we need the list of the loaded data sets
-        List<String> dataSetNames = JStatGuiGlobalData.dataSetContainer.dataSetNames();
+        /*List<String> dataSetNames = JStatGuiGlobalData.dataSetContainer.dataSetNames();
 
         if(dataSetNames.size() == 0){
             dataSetNames.add("No datasets loaded");
@@ -56,8 +56,13 @@ public class EDAAnalysis {
             dataSets.add(holder);
         }
 
+<<<<<<< HEAD:src/main/java/gui/controllers/EDAAnalysis.java
         model.addAttribute("dataSets", dataSets);
         return "analysis";
+=======
+        model.addAttribute("dataSets", dataSets);*/
+        return "analysis_index";
+>>>>>>> 51bd1b090437b307f29acb7ab8944885f583314a:src/main/java/gui/Analysis.java
     }
 
     @PostMapping
@@ -73,8 +78,12 @@ public class EDAAnalysis {
         // analysis we want to do
         if(formWrapper.eda != null){
 
+<<<<<<< HEAD:src/main/java/gui/controllers/EDAAnalysis.java
             this.computeDataSetStatistics(formWrapper);
             return "redirect:/analysis-result?taskName=" + "EDA"+formWrapper.colName;
+=======
+            return "redirect:/analysis-eda";
+>>>>>>> 51bd1b090437b307f29acb7ab8944885f583314a:src/main/java/gui/Analysis.java
         }
         else if(formWrapper.linear_regression != null){
 
@@ -88,13 +97,9 @@ public class EDAAnalysis {
         else if(formWrapper.kmeans_clustering != null){
 
         }
-        else{
-
-            // return an error message that no valid action
-            // was selected
-        }
 
         // redirect to the analysis page again
+<<<<<<< HEAD:src/main/java/gui/controllers/EDAAnalysis.java
         return "redirect:/analysis";
     }
 
@@ -139,4 +144,11 @@ public class EDAAnalysis {
             JStatGuiGlobalData.tasks.add(task);
         }
     }
+=======
+        // we have some sort of an error
+        return "/analysis";
+    }
+
+
+>>>>>>> 51bd1b090437b307f29acb7ab8944885f583314a:src/main/java/gui/Analysis.java
 }

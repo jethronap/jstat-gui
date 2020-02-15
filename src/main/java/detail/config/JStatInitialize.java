@@ -35,7 +35,7 @@ public class JStatInitialize {
 
         JStatGuiGlobalData.workersPool = new ThreadPoolTaskExecutor();
         JStatGuiGlobalData.workersPool.setWaitForTasksToCompleteOnShutdown(false);
-        JStatGuiGlobalData.tasks = new ArrayList<>();
+        JStatGuiGlobalData.workersPool.setCorePoolSize(10);
 
     }
 }

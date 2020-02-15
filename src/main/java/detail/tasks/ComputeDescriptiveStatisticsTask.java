@@ -1,8 +1,7 @@
 package detail.tasks;
 
 import detail.JStateMessage;
-import detail.compute.DescriptiveStats;
-import detail.compute.NumericSample;
+import detail.compute.DescriptiveStatistics;
 import detail.datasets.IDataSet;
 
 import java.util.ArrayList;
@@ -28,33 +27,46 @@ public class ComputeDescriptiveStatisticsTask<T> extends TaskBase {
         this.setState(State.STARTED);
 
         stats = new ArrayList<>();
-        for(String name : this.names){
 
-            DescriptiveStats statistics = new DescriptiveStats();
-            statistics.name = name;
-            dataSet.getItem(name);
-            statistics.compute(this.dataSet.getItem(name));
-            stats.add(statistics);
+        try {
+            for (String name : this.names) {
+
+                System.out.println("Compute statistics for: " + name);
+                DescriptiveStatistics statistics = new DescriptiveStatistics();
+                statistics.setDataSetName(this.dataSet.getName());
+                statistics.compute(this.dataSet.getItem(name));
+                stats.add(statistics);
+            }
+        }
+        catch(Exception e){
+            System.out.print("An exception occured whilst computing");
+            this.setState(State.FINISHED);
+            throw e;
         }
 
-        // now notify the Messaging that
+
+        // no notify the Messaging that
         msg = new JStateMessage("Statistics computation for " + dataSet.getName()+" is finished");
         this.setState(State.FINISHED);
+        System.out.println("Task Finished");
 
-        System.out.println("task finished");
         return msg;
     }
 
     /**
      * Return the result of the task
      */
-    public List<DescriptiveStats> getResult(){return this.stats;}
+
+    public List<DescriptiveStatistics> getResult(){return this.stats;}
+
 
     /**
      * Return the result. It waits the specified amount of time
      * if the task is not finished
      */
-    public List<DescriptiveStats> getResultOrWait(int time){
+
+    public List<DescriptiveStatistics> getResultOrWait(int time){
+
 
         if(!this.finished()){
 
@@ -84,6 +96,6 @@ public class ComputeDescriptiveStatisticsTask<T> extends TaskBase {
     /**
      * Map that holds the statistics for every column
      */
-    List<DescriptiveStats> stats;
+    List<DescriptiveStatistics> stats;
 
 }
