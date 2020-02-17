@@ -1,6 +1,6 @@
 package gui.controllers;
 
-import detail.wrappers.FileWrapper;
+import gui.wrappers.FileWrapper;
 import detail.tasks.LoadDataSetTask;
 import detail.config.JStatGuiGlobalData;
 import org.springframework.stereotype.Controller;

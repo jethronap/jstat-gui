@@ -1,4 +1,4 @@
-package detail.wrappers;
+package gui.wrappers;
 
 public class StatisticsWrapper {
 

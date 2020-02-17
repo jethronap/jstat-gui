@@ -8,7 +8,7 @@ import detail.tasks.ComputeDescriptiveStatisticsTask;
 import detail.tasks.ComputeTasksController;
 import detail.tasks.TaskBase;
 import detail.tasks.utils.DescriptiveStatisticsDBWritePolicy;
-import detail.wrappers.EDAAnalysisFormWrapper;
+import gui.wrappers.EDAAnalysisFormWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Controller;
