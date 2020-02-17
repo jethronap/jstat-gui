@@ -11,3 +11,5 @@ Spring-based GUI application for <a href="https://github.com/jethronap/jstat">``
 
 ## Setting Up MongoDB
 
+Checkout the guide <a href="guides/mongo/integrate_mongo.md">integrate_mongo</a>
+
