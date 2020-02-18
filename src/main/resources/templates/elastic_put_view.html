@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div th:replace="fragments/put_elastic_dataset"/>
+
+    <form method="POST" th:action="@{/elasticsearch-put}"  th:object="${elasticPutForm}">
+
+        <div th:if="${#fields.hasErrors()}">
+            <span class="validationError">
+                Please correct the problems below and resubmit.
+            </span>
+        </div>
+
+
+        <label for="formControlIndex">Index name*</label><br>
+        <input type="text" class="form-control-sm" id="formControlIndex" th:field="*{indexName}" required>
+        <br>
+
+        <label for="formControlType">Type name*</label><br>
+        <input type="text" class="form-control-sm" id="formControlType" th:field="*{typeName}"   required>
+        <br>
+
+        <label for="formControlDocId">Document id (optional)</label><br>
+        <input type="text" class="form-control-sm" id="formControlDocId" th:field="*{docId}"><br>
+        <br>
+
+
+        <label for="formControlJsonInputText">Document*</label><br>
+        <input type="text" class="form-control-sm" id="formControlJsonInputText" th:field="*{jsonInputText}"  required>
+        <br>
+
+        <p>
+            <button th:value="eda" type="submit" th:name="action" class="btn btn-secondary">Add Data</button>
+        </p>
+
+    </form>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

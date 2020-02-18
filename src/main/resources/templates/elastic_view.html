@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <form method="POST" th:action="@{/elastic_view}" target="_blank">
+        <div th:replace="fragments/load_elastic_dataset"/>
+        <p>
+            <button th:value="eda" type="submit" th:name="action" class="btn btn-secondary">Get Results</button>
+        </p>
+
+    </form>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
