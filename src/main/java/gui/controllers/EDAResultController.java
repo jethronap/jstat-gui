@@ -1,7 +1,7 @@
 package gui.controllers;
 
 
-import detail.wrappers.AnalysisFormWrapper;
+import gui.wrappers.AnalysisFormWrapper;
 import mongodb.ComputeTasksControllerDoc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
