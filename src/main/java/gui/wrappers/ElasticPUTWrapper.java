@@ -2,6 +2,7 @@ package gui.wrappers;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class ElasticPUTWrapper {
@@ -13,4 +14,9 @@ public class ElasticPUTWrapper {
     public String typeName;
 
     public String docId;
+
+    @NotBlank(message="A json formated string is required")
+    public String jsonInputText;
+
+
 }
