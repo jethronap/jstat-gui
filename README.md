@@ -8,8 +8,13 @@ Spring-based GUI application for <a href="https://github.com/jethronap/jstat">``
 
 - <a href="https://www.mongodb.com/">MongoDB</a>: Checkout <a href="https://docs.mongodb.com/manual/installation/">here</a> for installation instructions 
 
+## How To
 
-## Setting Up MongoDB
+### Integrate ```jstat```
 
-Checkout the guide <a href="guides/mongo/integrate_mongo.md">integrate_mongo</a>
+Checkout <a href="guides/integrate_jstat.md">Integrate ```jstat```</a>
+
+### Setting Up MongoDB
+
+Checkout <a href="guides/mongo/integrate_mongo.md">Integrate MongoDB</a>
 
