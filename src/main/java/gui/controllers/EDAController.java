@@ -38,7 +38,7 @@ public class EDAController {
         List<String> dataSetNames = JStatGuiGlobalData.dataSetContainer.dataSetNames();
 
         if (dataSetNames.size() == 0) {
-            dataSetNames.add("No data sets loaded");
+            throw new IllegalArgumentException("DataSet size SHOULD NOT be zero.");
         }
 
         List<DataSetViewInfoHolder> dataSets = new ArrayList<>();
