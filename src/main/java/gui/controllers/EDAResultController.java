@@ -1,6 +1,9 @@
 package gui.controllers;
 
 
+import detail.models.EDAResultModel;
+import detail.tasks.ComputeDescriptiveStatisticsTask;
+import detail.tasks.TaskBase;
 import detail.wrappers.AnalysisFormWrapper;
 import mongodb.ComputeTasksControllerDoc;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,8 @@ public class EDAResultController {
 
     @Value("${collections.control.tasks}")
     String controlCollection;
+
+    private EDAResultModel edaResultModel;
 
     @GetMapping
     public String analysisView(@RequestParam("controlTaskId") String controlTaskId, Model model) {
@@ -48,6 +53,7 @@ public class EDAResultController {
 
         model.addAttribute("controlTaskId", controlTaskId );
 
+
         return "eda_view_results";
     }
 
@@ -63,14 +69,15 @@ public class EDAResultController {
         }
         return "redirect:/eda_view_results?controlTaskId="+controlTaskId;
     }
-//    private EDAResultModel getResults(TaskBase task){
-//
-//        /**
-//         * i want to retrieve ids which are controlled by ComputeTasksControllerDoc
-//         * for every such id i want the resultDoc from the db
-//         * the put the model to serve them to the frontend
-//         */
-//
-//        return EDAResultModel ;
-//    }
+
+    private EDAResultModel getResults(TaskBase task){
+        
+        /**
+         * i want to retrieve ids which are controlled by ComputeTasksControllerDoc
+         * for every such id i want the resultDoc from the db
+         * the put the model to serve them to the frontend
+         */
+
+        return edaResultModel ;
+    }
 }
