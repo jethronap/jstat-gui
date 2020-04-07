@@ -6,6 +6,7 @@ import detail.tasks.ComputeDescriptiveStatisticsTask;
 import detail.tasks.TaskBase;
 import detail.wrappers.AnalysisFormWrapper;
 import mongodb.ComputeTasksControllerDoc;
+import mongodb.DescriptiveStatisticsResultDoc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -52,7 +53,9 @@ public class EDAResultController {
 
 
         model.addAttribute("controlTaskId", controlTaskId );
-
+        model.addAttribute("mean", getResults(controlTaskId).mean);
+        model.addAttribute("median", getResults(controlTaskId).median);
+        model.addAttribute("variance", getResults(controlTaskId).variance);
 
         return "eda_view_results";
     }
@@ -70,13 +73,18 @@ public class EDAResultController {
         return "redirect:/eda_view_results?controlTaskId="+controlTaskId;
     }
 
-    private EDAResultModel getResults(TaskBase task){
+
+    private EDAResultModel getResults(String controlTaskId){
         
         /**
          * i want to retrieve ids which are controlled by ComputeTasksControllerDoc
          * for every such id i want the resultDoc from the db
          * the put the model to serve them to the frontend
          */
+        DescriptiveStatisticsResultDoc doc = mongoTemplate.findById(controlTaskId, DescriptiveStatisticsResultDoc.class, controlCollection);
+        edaResultModel.mean = doc.getMean();
+        edaResultModel.median = doc.getMedian();
+        edaResultModel.variance = doc.getVariance();
 
         return edaResultModel ;
     }
