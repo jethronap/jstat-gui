@@ -93,6 +93,13 @@
             <version>3.6.1</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/io.github.jethronap/jstat -->
+        <dependency>
+            <groupId>io.github.jethronap</groupId>
+            <artifactId>jstat</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
             <groupId>junit</groupId>
@@ -135,7 +142,7 @@
             <artifactId>webjars-locator</artifactId>
             <version>0.38</version>
         </dependency>
-        
+
     </dependencies>
 
     <build>
