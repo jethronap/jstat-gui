@@ -41,24 +41,20 @@ public class EDAResultController {
         // to this control Task
         ComputeTasksControllerDoc doc = mongoTemplate.findById(controlTaskId, ComputeTasksControllerDoc.class, controlCollection);
 
-        if(doc == null){
-            throw new IllegalArgumentException("No control task for id: "+controlTaskId);
+        if (doc == null) {
+            throw new IllegalArgumentException("No control task for id: " + controlTaskId);
         }
 
         // if we haven't finished return
-        if(!doc.isFinished()){
-            model.addAttribute("controlTaskId", controlTaskId);
+        if (!doc.isFinished()) {
             // msg to hit f5 prompt user to refresh somehow.
+            model.addAttribute("please press f5 to view results");
             return "eda_view_results";
         }
-        /*else{
-            model.addAttribute("controlTaskId", controlTaskId );
-            return "analysis_result_descriptive_stats";
-        }*/
 
 
-        model.addAttribute("controlTaskId", controlTaskId );
-        //EDAResultModel resultModel = getResults(controlTaskId);
+        model.addAttribute("controlTaskId", controlTaskId);
+
         List<EDAResultModel> resultModelList = getResults(controlTaskId);
         Map<String, Map<String, Double>> columns = new HashMap<>();
 
@@ -73,14 +69,8 @@ public class EDAResultController {
 
             columns.put(edaResultModel.name, values);
             System.out.println(edaResultModel.name);
-//            columns.put("weight", values);
-//            model.addAttribute("mean", resultModel.mean);
-//            model.addAttribute("median", resultModel.median);
-//            model.addAttribute("variance", resultModel.variance);
-//
         }
 
-        model.addAttribute("controlTaskId", controlTaskId );
         model.addAttribute("columns", columns);
 
 
@@ -94,20 +84,20 @@ public class EDAResultController {
 
         ComputeTasksControllerDoc doc = mongoTemplate.findById(controlTaskId, ComputeTasksControllerDoc.class, controlCollection);
 
-        if(doc == null){
-            throw new IllegalArgumentException("No control task for id: "+controlTaskId);
+        if (doc == null) {
+            throw new IllegalArgumentException("No control task for id: " + controlTaskId);
         }
-        return "redirect:/eda_view_results?controlTaskId="+controlTaskId;
+        return "redirect:/eda_view_results?controlTaskId=" + controlTaskId;
     }
 
 
-    private List<EDAResultModel> getResults(String controlTaskId){
-        
-        /**
-         * i want to retrieve ids which are controlled by ComputeTasksControllerDoc
-         * for every such id i want the resultDoc from the db
-         * the put the model to serve them to the frontend
-         */
+    /**
+     * @param controlTaskId
+     * @return a list of results for every id.
+     * helper method to serve the results from the db to the frontend.
+     */
+    private List<EDAResultModel> getResults(String controlTaskId) {
+
         ComputeTasksControllerDoc doc = mongoTemplate.findById(controlTaskId, ComputeTasksControllerDoc.class, controlCollection);
         System.out.println(doc);
         List<String> taskIds = doc.getTaskIds();
@@ -119,14 +109,9 @@ public class EDAResultController {
                     DescriptiveStatisticsResultDoc.class, "compute_results_coll");
             EDAResultModel resultModel = descriptiveStatisticsResultDoc.getResultModel();
 
-//            resultModel.name = descriptiveStatisticsResultDoc.getName();
-//            resultModel.mean = descriptiveStatisticsResultDoc.getMean();
-//            resultModel.median = descriptiveStatisticsResultDoc.getMedian();
-//            resultModel.variance = descriptiveStatisticsResultDoc.getVariance();
             resultModelList.add(resultModel);
         }
 
-
-        return resultModelList ;
+        return resultModelList;
     }
 }
