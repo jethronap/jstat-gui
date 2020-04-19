@@ -2,9 +2,9 @@ package gui.controllers;
 
 
 import detail.models.EDAResultModel;
-import detail.tasks.ComputeDescriptiveStatisticsTask;
-import detail.tasks.TaskBase;
-import detail.wrappers.AnalysisFormWrapper;
+
+import gui.wrappers.AnalysisFormWrapper;
+
 import mongodb.ComputeTasksControllerDoc;
 import mongodb.DescriptiveStatisticsResultDoc;
 import org.springframework.beans.factory.annotation.Autowired;

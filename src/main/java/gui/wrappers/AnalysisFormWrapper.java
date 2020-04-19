@@ -1,8 +1,6 @@
-package detail.wrappers;
+package gui.wrappers;
 
 import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
 
 @Data
 public class AnalysisFormWrapper {
