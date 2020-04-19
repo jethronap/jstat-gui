@@ -18,15 +18,40 @@
 
     <!--    </form>-->
     <div class="jumbotron">
-        <h4>This is the Task ID:</h4>
-        <h5 th:text="${controlTaskId}"></h5>
-        <h4>This is Mean:</h4>
-        <h4 th:text="${mean}"></h4>
-        <h4>This is the Variance:</h4>
-        <h4 th:text="${variance}"></h4>
-        <h4>This is the Median:</h4>
-        <h4 th:text="${median}"></h4>
-        <!--    th:text="${mean}"-->
+
+        <table>
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>mean</th>-->
+<!--                <th>median</th>-->
+<!--                <th>variance</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+            <tbody>
+
+            <tr th:each="instance : ${columns}">
+                <td th:text="${instance.key}">keyvalue</td>
+                <td th:text="${instance.value}">num</td>
+            </tr>
+<!--            <tr th:each="column : ${columns}" th:with="column=${column.value}">-->
+
+<!--                <td th:text="${column.mean}">xxxx</td>-->
+<!--                <td th:text="${column.median}">xxxx</td>-->
+<!--                <td th:text="${column.variance}">xxxx</td>-->
+<!--            </tr>-->
+            </tbody>
+        </table>
+
+        <!--        <h4>This is the Task ID:</h4>-->
+<!--        <h5 th:text="${controlTaskId}"></h5>-->
+<!--        <h4>This is Mean:</h4>-->
+<!--        <h4 th:text="${mean}"></h4>-->
+<!--        <h4>This is the Variance:</h4>-->
+<!--        <h4 th:text="${variance}"></h4>-->
+<!--        <h4>This is the Median:</h4>-->
+<!--        <h4 th:text="${median}"></h4>-->
+
+        <!--    create a for loop -->
     </div>
 </div>
 <!-- /.container -->
