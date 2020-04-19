@@ -103,6 +103,13 @@ public class DescriptiveStatisticsResultDoc extends ComputeResultDocBase {
     }
 
     /**
+     * @return the EDA result model stored in the database
+     */
+    public EDAResultModel getResultModel() {
+        return this.model;
+    }
+
+    /**
      * Helper class used for mocking
      */
     @Override
