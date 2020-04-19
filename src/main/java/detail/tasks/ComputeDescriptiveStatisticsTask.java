@@ -13,10 +13,10 @@ import java.util.List;
  */
 public class ComputeDescriptiveStatisticsTask<T> extends TaskBase {
 
-    public ComputeDescriptiveStatisticsTask(String name, IDataSet dataSet, String... names){
+    public ComputeDescriptiveStatisticsTask(String taskType, IDataSet dataSet, String name){
 
-        super(name);
-        this.names = names;
+        super(taskType);
+        this.colName = name;
         this.dataSet = dataSet;
     }
 
@@ -29,14 +29,13 @@ public class ComputeDescriptiveStatisticsTask<T> extends TaskBase {
         stats = new ArrayList<>();
 
         try {
-            for (String name : this.names) {
 
-                System.out.println("Compute statistics for: " + name);
+                System.out.println("Compute statistics for: " + this.colName);
                 DescriptiveStatistics statistics = new DescriptiveStatistics();
-                statistics.setDataSetName(this.dataSet.getName());
-                statistics.compute(this.dataSet.getItem(name));
+                statistics.setDataSetName(this.colName);
+                statistics.compute(this.dataSet.getItem(colName));
                 stats.add(statistics);
-            }
+
         }
         catch(Exception e){
             System.out.print("An exception occured whilst computing");
@@ -91,7 +90,9 @@ public class ComputeDescriptiveStatisticsTask<T> extends TaskBase {
     /**
      * The names of the columns to work on
      */
-    private String[] names;
+
+    //String name colName
+    private String colName;
 
     /**
      * Map that holds the statistics for every column
