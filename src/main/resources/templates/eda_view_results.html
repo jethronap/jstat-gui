@@ -8,18 +8,40 @@
 <div th:replace="fragments/header :: header"/>
 
 <div class="container">
-<!--    <form method="POST" th:action="@{/eda_results(taskName=EDA)}">-->
-<!--        <div th:replace="fragments/select_dataset"/>-->
-<!--        <h4 class="display-4" th:text="${taskName}"></h4>-->
+    <!--    <form method="POST" th:action="@{/eda_results(taskName=EDA)}">-->
+    <!--        <div th:replace="fragments/select_dataset"/>-->
+    <!--        <h4 class="display-4" th:text="${taskName}"></h4>-->
 
-<!--        <p>-->
-<!--            <button th:value="eda" type="submit" th:name="action" class="btn btn-secondary">Get Results</button>-->
-<!--        </p>-->
+    <!--        <p>-->
+    <!--            <button th:value="eda" type="submit" th:name="action" class="btn btn-secondary">Get Results</button>-->
+    <!--        </p>-->
 
-<!--    </form>-->
+    <!--    </form>-->
+    <div class="jumbotron">
 
-    <h4 th:text="${controlTaskId}"></h4>
-    <!--    th:text="${mean}"-->
+        <table class="table table-sm table-dark table-hover">
+            <caption>List of Descriptive Statistics</caption>
+            <thead>
+            <tr class="table-active">
+                <th scope="col">ColName</th>
+                <th scope="col">Mean</th>
+                <th scope="col">Median</th>
+                <th scope="col">Variance</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="instance : ${columns}">
+                <th th:text="${instance.key}">keyvalue</th>
+                <th th:text="${instance.value.mean}">num</th>
+                <th th:text="${instance.value.variance}">num</th>
+                <th th:text="${instance.value.median}">num</th>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
 </div>
 <!-- /.container -->
 
