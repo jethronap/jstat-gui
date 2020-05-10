@@ -34,7 +34,7 @@ public class TableDataSet implements IDataSet<Column> {
             this.dataSet = Table.read().usingOptions(options);
         }
         catch (IOException e){
-            System.out.println("An excpetion was thrown: "+e.toString());
+            System.out.println("An exception was thrown: "+e.toString());
             //throw new IOException(e.getCause());
         }
     }

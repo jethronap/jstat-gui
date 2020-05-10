@@ -15,7 +15,7 @@ public class MapDataContainer implements IDataSetContainer {
     }
 
     /**
-     * Retruns the Data set labelled with the given String
+     * Returns the Data set labelled with the given String
      * @param name the name of the data set in the container
      * @return IDataSet
      */
