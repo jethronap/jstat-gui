@@ -1,5 +1,6 @@
 package detail.datasets;
 
+import dataloader.CsvDataLoader;
 import detail.datasets.IDataSet;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.columns.Column;
@@ -25,13 +26,17 @@ public class TableDataSet implements IDataSet<Column> {
      * Load the data set from the given filename
      */
     @Override
-    public void loadFrom(File fileName){
+    public void loadFrom(File fileName) throws IOException {
 
         File file = new File(fileName.getAbsolutePath());
-        CsvReadOptions options = CsvReadOptions.builder(file).missingValueIndicator("-").build();
+        //CsvReadOptions options = CsvReadOptions.builder(file).missingValueIndicator("-").build();
+
 
         try{
-            this.dataSet = Table.read().usingOptions(options);
+
+            this.dataSet = CsvDataLoader.TableLoader.parseFile(file);
+            //CsvDataLoader.TableLoader.buildNumericSample(this.dataSet, colName);
+
         }
         catch (IOException e){
             System.out.println("An exception was thrown: "+e.toString());
@@ -77,4 +82,5 @@ public class TableDataSet implements IDataSet<Column> {
     }
 
     private Table dataSet;
+    private String colName;
 }
