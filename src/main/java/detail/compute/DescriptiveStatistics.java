@@ -19,6 +19,7 @@ public class DescriptiveStatistics {
      */
     public <SampleTp> void compute(SampleTp sample) {
 
+        // dummy data to check that this method actually gets called and works.
         double[] array = {23, 32, 5, 6, 7, 7.8, 9, 34, 22, 77};
         org.apache.commons.math3.stat.descriptive.DescriptiveStatistics stats = new org.apache.commons.math3.stat.descriptive.DescriptiveStatistics();
 
