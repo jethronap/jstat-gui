@@ -1,6 +1,7 @@
 package detail.datasets;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public interface IDataSet<ItemTp> {
     /**
      * Load the data set from the given filename
      */
-    void loadFrom(File fileName);
+    void loadFrom(File fileName) throws IOException;
 
 
     /**
